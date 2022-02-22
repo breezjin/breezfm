@@ -1,3 +1,11 @@
+# SEED basic
+
+- creat-react-app
+- react-router
+- redux-toolkit
+- styledComponent + ThemeProvider + GlobalStyle
+- folder set
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

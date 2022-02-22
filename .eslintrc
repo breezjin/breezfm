@@ -17,7 +17,9 @@
     "prettier/prettier": [
       2,
       {
-        "semi": true
+        "semi": true,
+        "singleQuote": true,
+        "jsxSingleQuote": true
       }
     ],
     "import/order": [
