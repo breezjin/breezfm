@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import App from './App';
 import store from './app/store';
 import GlobalStyle from './common/components/GlobalStyle';
 import theme from './common/components/ThemeProvider';
+import Main from './features/main/Main';
 import reportWebVitals from './reportWebVitals';
 
 axios.defaults.baseURL = process.env.REACT_APP_AXIOS_BASE_URL;
@@ -20,8 +20,8 @@ ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<App />} />
-            <Route path='*' element={<App />} />
+            <Route path='/' element={<Main />} />
+            <Route path='*' element={<Main />} />
           </Routes>
         </BrowserRouter>
       </Provider>
