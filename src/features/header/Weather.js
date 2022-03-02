@@ -27,7 +27,7 @@ export default function Weather() {
   useEffect(() => {
     async function checkMyWeather(location) {
       const weatherInfo = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${location[1]}&lon=${location[0]}&lang=kr&units=metric&appid=${WEATHER_APPKEY}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location[1]}&lon=${location[0]}&lang=kr&units=metric&appid=${WEATHER_APPKEY}`
       );
       dispatch(currentWeatherUpdated(weatherInfo.data));
     }
