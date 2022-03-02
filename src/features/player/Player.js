@@ -107,7 +107,13 @@ export default function Player() {
         </div>
         <ButtonPlay isPlay={isPlay} onClick={handlePlayPause} />
       </div>
-      <div className='content-wrapper'>컨텐츠 관련 메시지 나올 공간임</div>
+      <div className='content-wrapper'>
+        <div className='content-notice'>
+          현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이 있는
+          공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다. 소리가
+          안들리나요? 볼륨을 높여주세요 :)
+        </div>
+      </div>
     </StyledPlayer>
   );
 }
@@ -163,6 +169,11 @@ const StyledPlayer = styled.div`
   }
 
   .content-wrapper {
-    padding: 0rem 1rem 2rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
+
+    .content-notice {
+      font-size: small;
+      padding: 1rem;
+    }
   }
 `;
