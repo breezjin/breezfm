@@ -1,10 +1,52 @@
-# SEED basic
+# BREEZ.fm
 
-- creat-react-app
-- react-router
-- redux-toolkit
-- styledComponent + ThemeProvider + GlobalStyle
-- folder set
+> **_Stand by your side with Music_**
+>
+> BREEZ.fm은 당신이 있는 그곳의 날씨와 무드를 파악하고, 그것을 반영한 플레이리스트를 준비해 음악을 전합니다. 오늘같은 날씨에 듣고싶은 음악. 평소 내 취향이 아니라도 일상 속에서 편안하게 전해오는 적절한 음악이 필요할 때가 있죠. 당신의 일상과 함께하는 BREEZ.fm을 만나 보세요.
+
+`Music`, `Streaming`, `Feed`
+
+## 기능
+
+- 위치정보 기반으로 사용자의 위치와 날씨를 파악해서 음악이 자동으로 스트리밍 됩니다.
+- 파악한 사용자의 위치와 날씨에 따라 적절한 분위기의 배경 이미지와 비주얼이펙트가 구성 됩니다.
+- 기본 선택된 무드(감정상태)를 변경해서 다른 분위기로 전환할 수도 있습니다.
+- 음악을 듣다가 드는 소회, 잡담 등을 이 공간에 함께있는 사람들과 Feed를 통해 나눌 수 있습니다.
+- Feed에서 작성하는 글 등은 회원가입을 통해서만 가능합니다.
+
+## 기술 스택
+
+- Node v16.14.0 (latest LTS at 2022.02.25)
+- Frontend
+  - React
+  - React Redux / Redux Toolkit
+  - styled-components
+  - amime.js
+  - sweetalert2
+  - Dayjs
+  - Axios
+  - browser-image-compression
+- Backend
+  - ExpressJS
+  - MongoDB, Mongoose
+  - jsonwebtoken
+- Common
+  - Amazon S3
+  - eslint
+  - prettier
+  - husky
+- API
+  - Open Weather Map api
+  - unsplash api
+  - Shazam api
+  - Auto DJ api
+  - youtube api
+- Test
+  - Front: Jest, React Testing library
+  - Back: mocha, chai, sinon, supertest
+- Deploy
+  - Front: Netlify
+  - Back: Amazon Elastic Beanstalk, Amazon **CodePipeline**
 
 # Getting Started with Create React App
 

@@ -1,9 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
+// import bgDark from '../../assets/bg-dark.png';
+// background-image: url(${bgDark});
+
 const GlobalStyle = createGlobalStyle`
   html {
     width: 100vw;
-    background-color: gray;
     margin: 0;
     padding: 0;
     display: flex;
@@ -15,9 +17,8 @@ const GlobalStyle = createGlobalStyle`
     flex-grow: 1;
     width: 100%;
     min-width: 320px;
-    max-width: 430px;
-    min-height: calc(100vh - 5rem);
-    font-family: Noto Sans KR, sans-serif;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    color: white;
     margin: 0;
     -ms-overflow-style: none;
     display: flex;
