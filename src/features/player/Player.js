@@ -109,9 +109,11 @@ export default function Player() {
       </div>
       <div className='content-wrapper'>
         <div className='content-notice'>
-          현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이 있는
-          공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다. 소리가
-          안들리나요? 볼륨을 높여주세요 :)
+          <span>
+            현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이
+            있는 공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다.
+          </span>
+          <p>소리가 안들리나요? 볼륨을 높여주세요 :)</p>
         </div>
       </div>
     </StyledPlayer>
@@ -119,14 +121,14 @@ export default function Player() {
 }
 
 const StyledPlayer = styled.div`
-  z-index: 1;
+  z-index: 10;
   position: relative;
   top: 4rem;
   left: 2rem;
   width: 25%;
   min-width: 300px;
   background-color: #000000a2;
-  border-radius: 0.8rem;
+  border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
 

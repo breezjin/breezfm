@@ -15,13 +15,24 @@ const StyledButtonPlay = styled.button`
   position: relative;
   width: 80px;
   height: 80px;
-  background: radial-gradient(
-    rgba(255, 0, 128, 0.8) 60%,
-    rgba(255, 255, 255, 1) 62%
-  );
+  ${(props) =>
+    props.isPlay
+      ? css`
+          background: radial-gradient(
+            rgba(255, 0, 128, 0.8) 60%,
+            rgba(255, 255, 255, 1) 62%
+          );
+          box-shadow: 0px 0px 25px 3px rgba(255, 0, 128, 0.8);
+        `
+      : css`
+          background: radial-gradient(
+            rgba(67, 67, 67, 0.8) 60%,
+            rgba(255, 255, 255, 1) 62%
+          );
+          box-shadow: 0px 0px 25px 3px rgba(67, 67, 67, 0.8);
+        `}
   border-radius: 50%;
   margin: 1rem auto;
-  box-shadow: 0px 0px 25px 3px rgba(255, 0, 128, 0.8);
   display: block;
   cursor: pointer;
 
