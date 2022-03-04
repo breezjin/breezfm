@@ -10,7 +10,12 @@ export default function Auth() {
 
   return (
     <StyledAuth>
-      <ButtonAuth>
+      <ButtonAuth
+        onClick={() => {
+          // eslint-disable-next-line no-console
+          console.log('function!!!');
+        }}
+      >
         <FiPenTool className='icon' />
         <div>Signup</div>
       </ButtonAuth>

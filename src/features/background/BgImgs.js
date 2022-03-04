@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Fade } from 'react-slideshow-image';
 import styled, { css } from 'styled-components';
 
+import bgDark from '../../assets/bg-dark.png';
 import getImgs from '../../common/api/getImgs';
 import UnsplashAttribute from './UnsplashAttribute';
 
@@ -20,7 +21,7 @@ export default function BgImgs() {
       if (!(typeof imgs === 'string')) {
         imgs.data.forEach((img) => {
           const newImg = {
-            url: `${img.urls.full}`,
+            url: `${img.urls.regular}`,
             caption: `${img.description}`,
             photographerName: `${img.user.name}`,
             photographerProfile: `${img.user.links.html}`,
@@ -31,7 +32,7 @@ export default function BgImgs() {
       }
     }
 
-    getCurrentImgs();
+    if (currentWeather) getCurrentImgs();
   }, [currentWeather]);
 
   return (
@@ -83,8 +84,6 @@ const StyledBgImgs = styled.div`
   ${(props) =>
     !props.currentImgs &&
     css`
-      background: url(https://source.unsplash.com/random?query=${props.query}&w=1920);
-      background-size: cover;
-      background-position: center;
+      background: url(${bgDark}) repeat top left;
     `}
 `;

@@ -1,13 +1,11 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { WiThermometer } from 'react-icons/wi';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { getMyLngLat, makePosionToLngLat } from '../../common/api/getMyGeo';
+import getWeather from '../../common/api/getWeather';
 import { currentLocationUpdated, currentWeatherUpdated } from './weatherSlice';
-
-const WEATHER_APPKEY = process.env.REACT_APP_OPEN_WEATHER_APPKEY;
 
 export default function Weather() {
   const dispatch = useDispatch();
@@ -26,9 +24,7 @@ export default function Weather() {
 
   useEffect(() => {
     async function checkMyWeather(location) {
-      const weatherInfo = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location[1]}&lon=${location[0]}&lang=kr&units=metric&appid=${WEATHER_APPKEY}`
-      );
+      const weatherInfo = await getWeather(location);
       dispatch(currentWeatherUpdated(weatherInfo.data));
     }
 

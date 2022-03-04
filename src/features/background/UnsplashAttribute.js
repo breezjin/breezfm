@@ -7,13 +7,18 @@ export default function UnsplashAttribute({ profile, name }) {
     <StyledUnsplashAttribute>
       <div className='unsplash-text'>
         Photo by{' '}
-        <a className='link' href={profile} target='_blank' rel='noreferrer'>
+        <a
+          className='link'
+          href={`${profile}?utm_source=breezfm&utm_medium=referral`}
+          target='_blank'
+          rel='noreferrer'
+        >
           {name}
         </a>{' '}
         on{' '}
         <a
           className='link'
-          href='https://unsplash.com/'
+          href='https://unsplash.com/?utm_source=breezfm&utm_medium=referral'
           target='_blank'
           rel='noreferrer'
         >
