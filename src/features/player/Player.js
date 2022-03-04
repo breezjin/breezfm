@@ -119,7 +119,7 @@ export default function Player() {
             현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이
             있는 공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다.
           </span>
-          <p>소리가 안들리나요? 볼륨을 높여주세요 :)</p>
+          <p>🔊 소리가 안들리나요? 볼륨을 높여주세요 :)</p>
         </div>
       </div>
     </StyledPlayer>
