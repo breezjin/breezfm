@@ -32,8 +32,8 @@ export default function Player() {
 
   useEffect(() => {
     async function setYoutubeUrl() {
-      const query = currentWeather.weather[0].description;
-      const { data } = await getYoutube(query);
+      const query = `${currentWeather.weather[0].main}`;
+      const { data } = await getYoutube(String(query));
       if (data.items.length > 0) {
         const newUrls = [];
         data.items.forEach((item) => {

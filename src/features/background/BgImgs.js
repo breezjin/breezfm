@@ -9,15 +9,13 @@ import UnsplashAttribute from './UnsplashAttribute';
 
 export default function BgImgs() {
   const [currentImgs, setCurrentImgs] = useState(null);
-  const [queryString, setQueryString] = useState('');
   const currentWeather = useSelector((state) => state.weather.currentWeather);
 
   useEffect(() => {
     async function getCurrentImgs() {
-      const query = currentWeather.weather[0].description;
-      setQueryString(query);
+      const query = `${currentWeather.weather[0].main},${currentWeather.weather[0].description}`;
       const newImgs = [];
-      const imgs = await getImgs(query);
+      const imgs = await getImgs(String(query));
       if (!(typeof imgs === 'string')) {
         imgs.data.forEach((img) => {
           const newImg = {
@@ -36,7 +34,7 @@ export default function BgImgs() {
   }, [currentWeather]);
 
   return (
-    <StyledBgImgs currentImgs={currentImgs} query={queryString}>
+    <StyledBgImgs currentImgs={currentImgs}>
       {currentImgs && (
         <div className='slide-container'>
           <Fade

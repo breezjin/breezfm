@@ -21,7 +21,7 @@ const hours = {
   morning: `morning,아침,모닝`,
   noon: `noon,정오,점심`,
   afternoon: `afternoon,오후`,
-  dinner: `dinner,저녁,개와늑대의시간,퇴근`,
+  dinner: `early,night,저녁`,
   night: `night,밤`,
   dawn: `dawn,새벽,깊은밤,깊은새벽`,
 };

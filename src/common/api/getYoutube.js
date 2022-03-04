@@ -9,7 +9,7 @@ export default async function getYoutube(query) {
 
   try {
     const data = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&q=playlist,${timeKeyword},${query}&type=video&videoEmbeddable=true`
+      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&q=playlist,music,${timeKeyword},${query}&type=video&videoEmbeddable=true`
     );
 
     return data;
