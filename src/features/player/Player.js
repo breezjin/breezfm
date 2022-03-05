@@ -36,7 +36,7 @@ export default function Player() {
         .split(' ')
         .join(',');
       const { data } = await getYoutube(String(query));
-      if (data.items.length > 0) {
+      if (data && data.items.length > 0) {
         const newUrls = [];
         data.items.forEach((item) => {
           const newUrl = `https://youtu.be/${item.id.videoId}`;

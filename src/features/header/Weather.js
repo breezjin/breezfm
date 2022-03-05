@@ -12,12 +12,13 @@ export default function Weather() {
   const currentLocation = useSelector((state) => state.weather.currentLocation);
   const currentWeather = useSelector((state) => state.weather.currentWeather);
 
+  async function checkMyLngLat() {
+    const position = await getMyLngLat();
+    const location = makePosionToLngLat(position);
+    dispatch(currentLocationUpdated(location));
+  }
+
   useEffect(() => {
-    async function checkMyLngLat() {
-      const position = await getMyLngLat();
-      const location = makePosionToLngLat(position);
-      dispatch(currentLocationUpdated(location));
-    }
     checkMyLngLat();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -30,7 +31,12 @@ export default function Weather() {
 
     if (currentLocation) {
       checkMyWeather(currentLocation);
+
+      setInterval(() => {
+        checkMyLngLat().then(() => checkMyWeather(currentLocation));
+      }, 1000 * 60 * 60);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocation, dispatch]);
 
   return (
