@@ -1,29 +1,55 @@
 import dayjs from 'dayjs';
 
-const seasons = {
-  spring: `spring,봄`,
-  summer: `summer,여름`,
-  autumn: `autumn,fall,가을`,
-  winter: `winter,겨울`,
+const seasonsKR = {
+  spring: `봄`,
+  summer: `여름`,
+  autumn: `가을`,
+  winter: `겨울`,
 };
 
-const days = {
-  mon: `monday,월요일`,
-  tue: `tuesday,화요일`,
-  wed: `wednesday,수요일`,
-  thu: `thursday,목요일`,
-  fri: `friday,금요일`,
-  sat: `saturday,토요일`,
-  sun: `sunday,일요일`,
+const daysKR = {
+  mon: `월요일`,
+  tue: `화요일`,
+  wed: `수요일`,
+  thu: `목요일`,
+  fri: `금요일`,
+  sat: `토요일,주말`,
+  sun: `일요일,주말`,
 };
 
-const hours = {
-  morning: `morning,아침,모닝`,
-  noon: `noon,정오,점심`,
-  afternoon: `afternoon,오후`,
-  dinner: `early,night,저녁`,
-  night: `night,밤`,
-  dawn: `dawn,새벽,깊은밤,깊은새벽`,
+const hoursKR = {
+  morning: `아침`,
+  noon: `점심`,
+  afternoon: `오후`,
+  dinner: `저녁`,
+  night: `밤`,
+  dawn: `새벽`,
+};
+
+const seasonsEN = {
+  spring: `spring`,
+  summer: `summer`,
+  autumn: `autumn`,
+  winter: `winter`,
+};
+
+const daysEN = {
+  mon: `monday`,
+  tue: `tuesday`,
+  wed: `wednesday`,
+  thu: `thursday`,
+  fri: `friday`,
+  sat: `saturday,weekend`,
+  sun: `sunday,weekend`,
+};
+
+const hoursEN = {
+  morning: `morning`,
+  noon: `noon`,
+  afternoon: `afternoon`,
+  dinner: `dinner`,
+  night: `night`,
+  dawn: `dawn`,
 };
 
 export default function getTimeKeywords() {
@@ -31,30 +57,60 @@ export default function getTimeKeywords() {
   const day = dayjs().get('day');
   const hour = dayjs().get('hour');
 
-  let monthKeyword;
-  let dayKeyword;
-  let hourKeyword;
+  let monthKeywordKR;
+  let dayKeywordKR;
+  let hourKeywordKR;
 
-  if (month >= 0 && month < 2) monthKeyword = seasons.winter;
-  if (month >= 2 && month < 5) monthKeyword = seasons.spring;
-  if (month >= 5 && month < 8) monthKeyword = seasons.summer;
-  if (month >= 8 && month < 10) monthKeyword = seasons.autumn;
-  if (month >= 10 && month <= 11) monthKeyword = seasons.winter;
+  if (month >= 0 && month < 2) monthKeywordKR = seasonsKR.winter;
+  if (month >= 2 && month < 5) monthKeywordKR = seasonsKR.spring;
+  if (month >= 5 && month < 8) monthKeywordKR = seasonsKR.summer;
+  if (month >= 8 && month < 10) monthKeywordKR = seasonsKR.autumn;
+  if (month >= 10 && month <= 11) monthKeywordKR = seasonsKR.winter;
 
-  if (day === 0) dayKeyword = days.sun;
-  if (day === 1) dayKeyword = days.mon;
-  if (day === 2) dayKeyword = days.tue;
-  if (day === 3) dayKeyword = days.wed;
-  if (day === 4) dayKeyword = days.thu;
-  if (day === 5) dayKeyword = days.fri;
-  if (day === 6) dayKeyword = days.sat;
+  if (day === 0) dayKeywordKR = daysKR.sun;
+  if (day === 1) dayKeywordKR = daysKR.mon;
+  if (day === 2) dayKeywordKR = daysKR.tue;
+  if (day === 3) dayKeywordKR = daysKR.wed;
+  if (day === 4) dayKeywordKR = daysKR.thu;
+  if (day === 5) dayKeywordKR = daysKR.fri;
+  if (day === 6) dayKeywordKR = daysKR.sat;
 
-  if (hour >= 6 && hour < 11) hourKeyword = hours.morning;
-  if (hour >= 11 && hour < 14) hourKeyword = hours.noon;
-  if (hour >= 14 && hour < 18) hourKeyword = hours.afternoon;
-  if (hour >= 18 && hour < 21) hourKeyword = hours.dinner;
-  if (hour >= 21 && hour <= 24) hourKeyword = hours.night;
-  if (hour >= 0 && hour < 6) hourKeyword = hours.dawn;
+  if (hour >= 6 && hour < 11) hourKeywordKR = hoursKR.morning;
+  if (hour >= 11 && hour < 14) hourKeywordKR = hoursKR.noon;
+  if (hour >= 14 && hour < 18) hourKeywordKR = hoursKR.afternoon;
+  if (hour >= 18 && hour < 21) hourKeywordKR = hoursKR.dinner;
+  if (hour >= 21 && hour <= 24) hourKeywordKR = hoursKR.night;
+  if (hour >= 0 && hour < 6) hourKeywordKR = hoursKR.dawn;
 
-  return `${monthKeyword},${dayKeyword},${hourKeyword}`;
+  let monthKeywordEN;
+  let dayKeywordEN;
+  let hourKeywordEN;
+
+  if (month >= 0 && month < 2) monthKeywordEN = seasonsEN.winter;
+  if (month >= 2 && month < 5) monthKeywordEN = seasonsEN.spring;
+  if (month >= 5 && month < 8) monthKeywordEN = seasonsEN.summer;
+  if (month >= 8 && month < 10) monthKeywordEN = seasonsEN.autumn;
+  if (month >= 10 && month <= 11) monthKeywordEN = seasonsEN.winter;
+
+  if (day === 0) dayKeywordEN = daysEN.sun;
+  if (day === 1) dayKeywordEN = daysEN.mon;
+  if (day === 2) dayKeywordEN = daysEN.tue;
+  if (day === 3) dayKeywordEN = daysEN.wed;
+  if (day === 4) dayKeywordEN = daysEN.thu;
+  if (day === 5) dayKeywordEN = daysEN.fri;
+  if (day === 6) dayKeywordEN = daysEN.sat;
+
+  if (hour >= 6 && hour < 11) hourKeywordEN = hoursEN.morning;
+  if (hour >= 11 && hour < 14) hourKeywordEN = hoursEN.noon;
+  if (hour >= 14 && hour < 18) hourKeywordEN = hoursEN.afternoon;
+  if (hour >= 18 && hour < 21) hourKeywordEN = hoursEN.dinner;
+  if (hour >= 21 && hour <= 24) hourKeywordEN = hoursEN.night;
+  if (hour >= 0 && hour < 6) hourKeywordEN = hoursEN.dawn;
+
+  const keyword = {
+    KR: `${hourKeywordKR},${dayKeywordKR},${monthKeywordKR}`,
+    EN: `${hourKeywordEN},${dayKeywordEN},${monthKeywordEN}`,
+  };
+
+  return keyword;
 }

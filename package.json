@@ -26,6 +26,7 @@
     "styled-components": "^5.3.3",
     "sweetalert2": "^11.4.4",
     "web-vitals": "^2.1.4",
+    "ytm-search": "^1.0.6",
     "yup": "^0.32.11"
   },
   "scripts": {

@@ -13,7 +13,7 @@ export default function BgImgs() {
 
   useEffect(() => {
     async function getCurrentImgs() {
-      const query = `${currentWeather.weather[0].main},${currentWeather.weather[0].description}`;
+      const query = `${currentWeather.weather[0].main}`.split(' ').join(',');
       const newImgs = [];
       const imgs = await getImgs(String(query));
       if (!(typeof imgs === 'string')) {

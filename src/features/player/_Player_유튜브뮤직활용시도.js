@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player/youtube';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import getYoutube from '../../common/api/getYoutube';
+import getYoutubeMusic from '../../common/api/getYoutubeMusic';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
 
 export default function Player() {
@@ -19,7 +19,7 @@ export default function Player() {
   };
 
   const handleVolumeChange = (e) => {
-    setVolume(Number(e.target.value));
+    setVolume(e.target.value);
   };
 
   const handleVolumeMinChange = () => {
@@ -35,11 +35,11 @@ export default function Player() {
       const query = `${currentWeather.weather[0].description}`
         .split(' ')
         .join(',');
-      const { data } = await getYoutube(String(query));
-      if (data.items.length > 0) {
+      const musics = await getYoutubeMusic(query);
+      if (musics.length > 0) {
         const newUrls = [];
-        data.items.forEach((item) => {
-          const newUrl = `https://youtu.be/${item.id.videoId}`;
+        musics.forEach((music) => {
+          const newUrl = `https://youtu.be/${music.browseId}`;
           newUrls.push(newUrl);
         });
         setUrl(newUrls);

@@ -6,10 +6,11 @@ const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 
 export default async function getYoutube(query) {
   const timeKeyword = getTimeKeywords();
+  const queryString = `playlist,날씨,${query},${timeKeyword.KR}`;
 
   try {
     const data = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&q=playlist,music,${timeKeyword},${query}&type=video&videoEmbeddable=true`
+      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&q=${queryString}&type=video&videoEmbeddable=true`
     );
 
     return data;
