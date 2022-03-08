@@ -26,7 +26,7 @@ export default function Menu() {
           onKeyDown={() => navigate('/')}
           tabIndex={0}
         >
-          Video
+          Feel
         </div>
       </li>
       <li>
@@ -37,7 +37,18 @@ export default function Menu() {
           onKeyDown={() => navigate('/')}
           tabIndex={0}
         >
-          Feed
+          Daily
+        </div>
+      </li>
+      <li>
+        <div
+          className='menu'
+          role='button'
+          onClick={() => navigate('/')}
+          onKeyDown={() => navigate('/')}
+          tabIndex={0}
+        >
+          Videos
         </div>
       </li>
     </StyledMenu>

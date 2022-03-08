@@ -9,6 +9,7 @@ import ButtonPlay from '../../common/components/buttons/ButtonPlay';
 
 export default function Player() {
   const [url, setUrl] = useState(null);
+  const [tags, setTags] = useState(null);
   const [mute, setMute] = useState(true);
   const [volume, setVolume] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
@@ -35,7 +36,10 @@ export default function Player() {
       const query = `${currentWeather.weather[0].description}`
         .split(' ')
         .join(',');
-      const { data } = await getYoutube(String(query));
+      const { data, queryString } = await getYoutube(query);
+      setTags(
+        queryString.replace('[playlist],music', '').split(',').join(' #')
+      );
       if (data && data.items.length > 0) {
         const newUrls = [];
         data.items.forEach((item) => {
@@ -122,10 +126,11 @@ export default function Player() {
               세팅이 더 잘 구성되어야 하겠어요. 흠...
             </p>
           )}
-          <span>
+          <p>
             현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이
             있는 공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다.
-          </span>
+          </p>
+          <p className='tag'>{tags}</p>
         </div>
       </div>
     </StyledPlayer>
@@ -189,5 +194,9 @@ const StyledPlayer = styled.div`
   .content-notice {
     font-size: small;
     padding: 1rem;
+  }
+
+  .tag {
+    color: #a0a0a0;
   }
 `;
