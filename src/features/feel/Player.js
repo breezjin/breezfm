@@ -4,11 +4,12 @@ import ReactPlayer from 'react-player/youtube';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import getYoutubeMusic from '../../common/api/getYoutubeMusic';
+import getYoutube from '../../common/api/getYoutube';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
 
 export default function Player() {
   const [url, setUrl] = useState(null);
+  const [tags, setTags] = useState(null);
   const [mute, setMute] = useState(true);
   const [volume, setVolume] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
@@ -19,7 +20,7 @@ export default function Player() {
   };
 
   const handleVolumeChange = (e) => {
-    setVolume(e.target.value);
+    setVolume(Number(e.target.value));
   };
 
   const handleVolumeMinChange = () => {
@@ -35,11 +36,14 @@ export default function Player() {
       const query = `${currentWeather.weather[0].description}`
         .split(' ')
         .join(',');
-      const musics = await getYoutubeMusic(query);
-      if (musics.length > 0) {
+      const { data, queryString } = await getYoutube(query);
+      setTags(
+        queryString.replace('[playlist],music', '').split(',').join(' #')
+      );
+      if (data && data.items.length > 0) {
         const newUrls = [];
-        musics.forEach((music) => {
-          const newUrl = `https://youtu.be/${music.browseId}`;
+        data.items.forEach((item) => {
+          const newUrl = `https://youtu.be/${item.id.videoId}`;
           newUrls.push(newUrl);
         });
         setUrl(newUrls);
@@ -107,6 +111,11 @@ export default function Player() {
             <GiSpeaker className='controll-volume-minmax-btn' />
           </div>
         </div>
+        {volume === 0 && (
+          <div className='content-notice'>
+            ⚠️ 음소거 상태 입니다. 볼륨을 높여주세요~
+          </div>
+        )}
         <ButtonPlay isPlay={isPlay} onClick={handlePlayPause} />
       </div>
       <div className='content-wrapper'>
@@ -117,11 +126,11 @@ export default function Player() {
               세팅이 더 잘 구성되어야 하겠어요. 흠...
             </p>
           )}
-          <span>
+          <p>
             현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이
             있는 공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다.
-          </span>
-          <p>🔊 소리가 안들리나요? 볼륨을 높여주세요 :)</p>
+          </p>
+          <p className='tag'>{tags}</p>
         </div>
       </div>
     </StyledPlayer>
@@ -130,7 +139,7 @@ export default function Player() {
 
 const StyledPlayer = styled.div`
   z-index: 10;
-  position: relative;
+  position: absolute;
   top: 4rem;
   left: 2rem;
   width: 25%;
@@ -180,10 +189,14 @@ const StyledPlayer = styled.div`
 
   .content-wrapper {
     padding: 1rem 1rem 1rem 1rem;
+  }
 
-    .content-notice {
-      font-size: small;
-      padding: 1rem;
-    }
+  .content-notice {
+    font-size: small;
+    padding: 1rem;
+  }
+
+  .tag {
+    color: #a0a0a0;
   }
 `;

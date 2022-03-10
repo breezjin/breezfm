@@ -11,8 +11,8 @@ export default function Menu() {
         <div
           className='menu'
           role='button'
-          onClick={() => navigate('/')}
-          onKeyDown={() => navigate('/')}
+          onClick={() => navigate('/about')}
+          onKeyDown={() => navigate('/about')}
           tabIndex={0}
         >
           About
@@ -22,8 +22,8 @@ export default function Menu() {
         <div
           className='menu'
           role='button'
-          onClick={() => navigate('/')}
-          onKeyDown={() => navigate('/')}
+          onClick={() => navigate('/feel')}
+          onKeyDown={() => navigate('/feel')}
           tabIndex={0}
         >
           Feel
@@ -33,8 +33,8 @@ export default function Menu() {
         <div
           className='menu'
           role='button'
-          onClick={() => navigate('/')}
-          onKeyDown={() => navigate('/')}
+          onClick={() => navigate('/daily')}
+          onKeyDown={() => navigate('/daily')}
           tabIndex={0}
         >
           Daily
@@ -44,8 +44,8 @@ export default function Menu() {
         <div
           className='menu'
           role='button'
-          onClick={() => navigate('/')}
-          onKeyDown={() => navigate('/')}
+          onClick={() => navigate('/videos')}
+          onKeyDown={() => navigate('/videos')}
           tabIndex={0}
         >
           Videos

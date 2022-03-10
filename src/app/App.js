@@ -1,22 +1,33 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BgImgs from '../features/background/BgImgs';
-import Feeds from '../features/feed/Feeds';
 import Header from '../features/header/Header';
-import Player from '../features/player/Player';
 
 export default function App() {
   return (
     <StyledApp>
       <Header />
+      <div className='pages'>
+        <Outlet />
+      </div>
       <BgImgs />
-      <Player />
-      <Feeds />
     </StyledApp>
   );
 }
 
 const StyledApp = styled.div`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .pages {
+    width: 100%;
+    height: calc(100vh - 3rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
