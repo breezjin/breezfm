@@ -33,9 +33,7 @@ export default function Player() {
 
   useEffect(() => {
     async function setYoutubeUrl() {
-      const query = `${currentWeather.weather[0].description}`
-        .split(' ')
-        .join(',');
+      const query = `${currentWeather.weather[0].main}`;
       const { data, queryString } = await getYoutube(query);
       setTags(
         queryString.replace('[playlist],music', '').split(',').join(' #')

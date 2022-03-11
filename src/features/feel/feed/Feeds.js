@@ -14,6 +14,12 @@ export default function Feeds() {
         <Feed />
         <Feed />
         <Feed />
+        <Feed />
+        <Feed />
+        <Feed />
+        <Feed />
+        <Feed />
+        <Feed />
       </div>
     </StyledFeeds>
   );
@@ -26,6 +32,7 @@ const StyledFeeds = styled.div`
   right: 2rem;
   width: 25%;
   min-width: 400px;
+  max-height: calc(100vh - 5rem);
   background-color: #000000a2;
   border-radius: 0.3rem;
   display: flex;
@@ -34,13 +41,14 @@ const StyledFeeds = styled.div`
   gap: 1rem;
 
   .feed-editor {
-    width: 90%;
+    width: 94%;
     margin-top: 1rem;
   }
 
   .feed-list {
-    width: 90%;
+    width: 94%;
     margin-bottom: 1rem;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;

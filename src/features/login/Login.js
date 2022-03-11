@@ -6,30 +6,7 @@ import styled from 'styled-components';
 import authenticate from '../../common/api/auth';
 import { userLoggedIn } from './loginSlice';
 
-const LoginProcessContainer = styled.div`
-  width: inherit;
-  height: inherit;
-  padding-top: 1rem;
-  padding: 1rem;
-  background-color: black;
-
-  .title {
-    margin-top: 0;
-    color: #bc955c;
-  }
-
-  .message {
-    color: white;
-  }
-
-  .redirection-link {
-    :visited {
-      color: white;
-    }
-  }
-`;
-
-function Login() {
+export default function Login() {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('unknown');
   const navigate = useNavigate();
@@ -82,4 +59,20 @@ function Login() {
   );
 }
 
-export default Login;
+const LoginProcessContainer = styled.div`
+  z-index: 5;
+  width: 90%;
+  height: 90%;
+  background-color: #000000a2;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .redirection-link {
+    :visited {
+      color: white;
+    }
+  }
+`;

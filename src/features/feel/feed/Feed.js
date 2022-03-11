@@ -25,7 +25,7 @@ export default function Feed() {
 const StyledFeed = styled.div`
   width: 100%;
   color: black;
-  background-color: white;
+  background-color: ivory;
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;

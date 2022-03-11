@@ -10,7 +10,7 @@ export default function ErrorPage() {
 }
 
 const StyledErrorPage = styled.div`
-  z-index: 5;
+  z-index: 20;
   width: 90%;
   height: 90%;
   background-color: #000000a2;

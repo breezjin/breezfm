@@ -26,7 +26,7 @@ export const loginSlice = createSlice({
 });
 
 export async function checkToken(dispatch) {
-  const POODADAK_TOKEN = localStorage.getItem('POODADAK_TOKEN');
+  const BREEZ_TOKEN = localStorage.getItem('BREEZ_TOKEN');
 
   try {
     const response = await axios.post(
@@ -34,7 +34,7 @@ export async function checkToken(dispatch) {
       {},
       {
         headers: {
-          Authorization: `Bearer ${POODADAK_TOKEN}`,
+          Authorization: `Bearer ${BREEZ_TOKEN}`,
         },
       }
     );
