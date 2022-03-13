@@ -4,7 +4,9 @@ import axios from 'axios';
 export const initialState = {
   isLoggedIn: false,
   userId: null,
-  lastVisitedToilet: null,
+  userAvatar: null,
+  userName: null,
+  userEmail: null,
 };
 
 export const loginSlice = createSlice({
@@ -13,14 +15,17 @@ export const loginSlice = createSlice({
   reducers: {
     userLoggedIn: (state, action) => {
       state.isLoggedIn = true;
-      state.userId = action.payload;
+      state.userId = action.payload.userId;
+      state.userAvatar = action.payload.userAvatar;
+      state.userName = action.payload.userName;
+      state.userEmail = action.payload.userEmail;
     },
     userLoggedOut: (state) => {
       state.isLoggedIn = false;
       state.userId = null;
-    },
-    visitedToiletComponent: (state, action) => {
-      state.lastVisitedToilet = action.payload;
+      state.userAvatar = null;
+      state.userName = null;
+      state.userEmail = null;
     },
   },
 });
@@ -40,7 +45,7 @@ export async function checkToken(dispatch) {
     );
 
     if (response.data.result === 'verified') {
-      dispatch({ type: 'login/userLoggedIn', payload: response.data.userId });
+      dispatch({ type: 'login/userLoggedIn', payload: response.data });
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -54,7 +59,6 @@ export async function checkToken(dispatch) {
   }
 }
 
-export const { userLoggedIn, userLoggedOut, visitedToiletComponent } =
-  loginSlice.actions;
+export const { userLoggedIn, userLoggedOut } = loginSlice.actions;
 
 export default loginSlice.reducer;

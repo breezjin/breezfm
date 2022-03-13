@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
 import styled from 'styled-components';
 
+import { saveFeed } from '../../../common/api/feedApis';
+
 export default function FeedEdit() {
   const [enteredText, setEnteredText] = useState('');
+
+  // const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const myId = useSelector((state) => state.login.userId);
+  const myAvatar = useSelector((state) => state.login.userAvatar);
+  const myName = useSelector((state) => state.login.userName);
+
+  function saveNewFeed() {
+    const newFeed = {
+      writerId: myId,
+      writerAvatar: myAvatar,
+      writerName: myName,
+      description: enteredText,
+      tag: null,
+      updatedAt: new Date().toISOString(),
+    };
+
+    saveFeed(newFeed);
+    setEnteredText('');
+  }
 
   return (
     <StyledFeedEdit>
       <div className='edit-area'>
         <TextareaAutosize
           className='text-area'
-          onChange={(e) => setEnteredText(e.target.value)}
+          onChange={(e) =>
+            setEnteredText(e.target.value.replace(/\n\r?/g, '\n'))
+          }
           placeholder='지금 나오는 음악 어떤가요?'
+          value={enteredText}
+          minLength={2}
+          maxLength={500}
         />
-        <button className='btn' type='submit'>
+        <button className='btn' type='button' onClick={saveNewFeed}>
           입력하기
         </button>
       </div>
@@ -39,12 +66,13 @@ const StyledFeedEdit = styled.form`
       flex-grow: 1;
       width: 100%;
       min-height: 2rem;
+      white-space: pre-wrap;
       border-radius: 0.3rem;
       resize: none;
       outline: none;
 
       ::placeholder {
-        font-family: inherit;
+        font-family: unset;
       }
     }
 
@@ -59,6 +87,7 @@ const StyledFeedEdit = styled.form`
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
     }
   }
 `;

@@ -42,7 +42,7 @@ export default function Weather() {
   return (
     <StyledWeather>
       {currentWeather && <WiThermometer size={24} />}
-      {currentWeather && `${currentWeather.main.temp}℃`}
+      {currentWeather && `${Math.round(currentWeather.main.temp)}℃`}
       {currentWeather && (
         <img
           className='weather-icon'

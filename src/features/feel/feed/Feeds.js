@@ -1,25 +1,98 @@
-import React from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
+import useFeedsSearch from '../../../common/hooks/useFeedsSearch';
 import Feed from './Feed';
 import FeedEdit from './FeedEdit';
 
 export default function Feeds() {
+  const FeedsSwal = withReactContent(Swal);
+
+  const [query, setQuery] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const { loading, error, feeds, hasMore, refreshFeeds } = useFeedsSearch(
+    query,
+    pageNumber
+  );
+
+  const observer = useRef(null);
+  const lastFeedElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
+
+  function handleRefresh() {
+    refreshFeeds();
+    setPageNumber(1);
+  }
+
+  function handleSearch(e) {
+    setQuery(e.target.value);
+    setPageNumber(1);
+  }
+
+  useEffect(() => {
+    if (error) {
+      FeedsSwal.fire({
+        icon: 'warning',
+        titleText: '피드를 불러올 수 없습니다.',
+        confirmButtonText: '확인',
+      });
+    }
+  }, [FeedsSwal, error]);
+
   return (
     <StyledFeeds>
       <div className='feed-editor'>
         <FeedEdit />
+        <input type='text' value={query} onChange={handleSearch} />
+        <button type='button' onClick={handleRefresh}>
+          새로고침
+        </button>
       </div>
       <div className='feed-list'>
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
-        <Feed />
+        {Array.from(feeds).map((feed, index) => {
+          if (feeds.length === index + 1) {
+            return (
+              <div className='feed' key={feed._id} ref={lastFeedElementRef}>
+                <Feed
+                  key={feed._id}
+                  writerAvatar={feed.writerAvatar}
+                  writerName={feed.writerName}
+                  description={feed.description}
+                  tag={feed.tag}
+                  updatedAt={feed.updatedAt}
+                />
+              </div>
+            );
+          }
+          return (
+            <div className='feed' key={feed._id}>
+              <Feed
+                key={feed._id}
+                writerAvatar={feed.writerAvatar}
+                writerName={feed.writerName}
+                description={feed.description}
+                tag={feed.tag}
+                updatedAt={feed.updatedAt}
+              />
+            </div>
+          );
+        })}
+        <div>{loading && 'Loading...'}</div>
+        <div>{error && 'Error'}</div>
       </div>
     </StyledFeeds>
   );
@@ -53,5 +126,9 @@ const StyledFeeds = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+  }
+
+  .feed {
+    width: 100%;
   }
 `;

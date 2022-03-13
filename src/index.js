@@ -15,6 +15,7 @@ import ErrorPage from './features/errorPage/ErrorPage';
 import Feel from './features/feel/Feel';
 import Login from './features/login/Login';
 import { checkToken } from './features/login/loginSlice';
+import Profile from './features/profile/Profile';
 import Videos from './features/videos/Videos';
 import reportWebVitals from './reportWebVitals';
 
@@ -36,6 +37,7 @@ ReactDOM.render(
               <Route path='videos' element={<Videos />} />
               <Route path='error' element={<ErrorPage />} />
               <Route path='login/process' element={<Login />} />
+              <Route path='user/:userId' element={<Profile />} />
               <Route path='*' element={<ErrorPage />} />
             </Route>
           </Routes>

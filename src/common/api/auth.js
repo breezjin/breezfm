@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function authenticate(state, code) {
+export default async function authenticate(state, code) {
   if (!state) {
     const response = await axios.post(
       'auth/kakao',
@@ -18,5 +18,3 @@ async function authenticate(state, code) {
 
   return response;
 }
-
-export default authenticate;

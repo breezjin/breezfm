@@ -1,26 +1,55 @@
+import dayjs from 'dayjs';
+import Proptypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import profile from '../../../assets/profile.jpg';
 import ButtonMore from '../../../common/components/buttons/ButtonMore';
 
-export default function Feed() {
+export default function Feed({
+  writerAvatar,
+  writerName,
+  description,
+  tag,
+  updatedAt,
+}) {
   return (
     <StyledFeed>
       <div className='feed-header'>
         <div className='profile'>
-          <img className='profile-img' src={profile} alt='profile' />
-          <div className='profile-name'>김이름</div>
-          <div className='profile-write-at'>2022.03.12 12:31</div>
+          <img className='profile-img' src={writerAvatar} alt='profile' />
+          <div className='profile-name'>{writerName}</div>
+          <div className='profile-write-at'>
+            {dayjs(updatedAt).format('YYYY.MM.DD hh:mm')}
+          </div>
         </div>
         <ButtonMore />
       </div>
       <div className='feed-body'>
-        피드 컨텐츠는 이런식으로 작성되어 보여질 예정 입니다.
+        {description.split('\n').map((line) => (
+          <span key={`${line}`}>
+            {line}
+            <br />
+          </span>
+        ))}
+      </div>
+      <div className='feed-tag' style={{ height: '0rem' }}>
+        {tag}
       </div>
     </StyledFeed>
   );
 }
+
+Feed.propTypes = {
+  writerAvatar: Proptypes.string.isRequired,
+  writerName: Proptypes.string.isRequired,
+  description: Proptypes.string.isRequired,
+  tag: Proptypes.string,
+  updatedAt: Proptypes.string.isRequired,
+};
+
+Feed.defaultProps = {
+  tag: '',
+};
 
 const StyledFeed = styled.div`
   width: 100%;

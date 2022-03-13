@@ -20,7 +20,7 @@ export default function Login() {
       try {
         const { data } = await authenticate(state, code);
         localStorage.setItem('BREEZ_TOKEN', data.BREEZ_TOKEN);
-        dispatch(userLoggedIn(data.userId));
+        dispatch(userLoggedIn(data));
         navigate('/');
       } catch (error) {
         const fetchedErrorMessage = error.response.data.errMessage

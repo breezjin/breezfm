@@ -37,7 +37,7 @@ export default function ButtonMore() {
   );
 }
 
-const StyledButtonMore = styled.button`
+const StyledButtonMore = styled.div`
   width: 2rem;
   height: 2rem;
   border: none;
@@ -56,7 +56,7 @@ const StyledButtonMore = styled.button`
     width: 4rem;
     position: relative;
     top: 0;
-    right: 190%;
+    right: 100%;
     display: flex;
     flex-direction: column;
 
