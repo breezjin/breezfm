@@ -1,13 +1,5 @@
 import axios from 'axios';
 
-export async function getFeeds() {
-  try {
-    return await axios.get('/feeds');
-  } catch (error) {
-    return error.message;
-  }
-}
-
 export async function getFeed(feedId) {
   try {
     return await axios.get(`/feeds/${feedId}`);

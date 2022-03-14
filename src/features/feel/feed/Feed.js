@@ -1,54 +1,56 @@
 import dayjs from 'dayjs';
 import Proptypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import ButtonMore from '../../../common/components/buttons/ButtonMore';
 
-export default function Feed({
-  writerAvatar,
-  writerName,
-  description,
-  tag,
-  updatedAt,
-}) {
+export default function Feed({ feed }) {
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const myId = useSelector((state) => state.login.userId);
+
+  const [description, setDescription] = useState(feed.description);
+
+  function editDescription(newDescription) {
+    setDescription(newDescription);
+  }
+
   return (
     <StyledFeed>
       <div className='feed-header'>
         <div className='profile'>
-          <img className='profile-img' src={writerAvatar} alt='profile' />
-          <div className='profile-name'>{writerName}</div>
+          <img className='profile-img' src={feed.writerAvatar} alt='profile' />
+          <div className='profile-name'>{feed.writerName}</div>
           <div className='profile-write-at'>
-            {dayjs(updatedAt).format('YYYY.MM.DD hh:mm')}
+            {dayjs(feed.updatedAt).format('YYYY.MM.DD hh:mm')}
           </div>
         </div>
-        <ButtonMore />
+        {isLoggedIn && feed.writerId === myId && (
+          <ButtonMore feed={feed} editFunc={editDescription} />
+        )}
       </div>
       <div className='feed-body'>
-        {description.split('\n').map((line) => (
-          <span key={`${line}`}>
-            {line}
-            <br />
-          </span>
-        ))}
+        {description === '삭제된 피드 입니다.' && (
+          <span style={{ color: 'red' }}>{description}</span>
+        )}
+        {description !== '삭제된 피드 입니다.' &&
+          description.split('\n').map((line) => (
+            <span key={`${line}`}>
+              {line}
+              <br />
+            </span>
+          ))}
       </div>
       <div className='feed-tag' style={{ height: '0rem' }}>
-        {tag}
+        {feed.tag}
       </div>
     </StyledFeed>
   );
 }
 
 Feed.propTypes = {
-  writerAvatar: Proptypes.string.isRequired,
-  writerName: Proptypes.string.isRequired,
-  description: Proptypes.string.isRequired,
-  tag: Proptypes.string,
-  updatedAt: Proptypes.string.isRequired,
-};
-
-Feed.defaultProps = {
-  tag: '',
+  feed: Proptypes.node.isRequired,
 };
 
 const StyledFeed = styled.div`

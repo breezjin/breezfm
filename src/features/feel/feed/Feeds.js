@@ -11,9 +11,7 @@ import FeedEdit from './FeedEdit';
 
 export default function Feeds() {
   const FeedsSwal = withReactContent(Swal);
-
   const [pageNumber, setPageNumber] = useState(1);
-
   const { loading, error, feeds, hasMore } = useFeedsSearch(pageNumber);
 
   const observer = useRef(null);
@@ -66,27 +64,13 @@ export default function Feeds() {
           if (feeds.length === index + 1) {
             return (
               <div className='feed' key={feed._id} ref={lastFeedElementRef}>
-                <Feed
-                  key={feed._id}
-                  writerAvatar={feed.writerAvatar}
-                  writerName={feed.writerName}
-                  description={feed.description}
-                  tag={feed.tag}
-                  updatedAt={feed.updatedAt}
-                />
+                <Feed key={feed._id} feed={feed} />
               </div>
             );
           }
           return (
             <div className='feed' key={feed._id}>
-              <Feed
-                key={feed._id}
-                writerAvatar={feed.writerAvatar}
-                writerName={feed.writerName}
-                description={feed.description}
-                tag={feed.tag}
-                updatedAt={feed.updatedAt}
-              />
+              <Feed key={feed._id} feed={feed} />
             </div>
           );
         })}
