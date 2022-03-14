@@ -26,7 +26,9 @@ export default function FeedEdit({ callback }) {
 
     saveFeed(newFeed);
     setEnteredText('');
-    callback();
+    setTimeout(() => {
+      callback();
+    }, 0);
   }
 
   return (

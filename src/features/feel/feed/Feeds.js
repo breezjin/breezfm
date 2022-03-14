@@ -12,8 +12,7 @@ export default function Feeds() {
 
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { loading, error, feeds, hasMore, refreshFeeds } =
-    useFeedsSearch(pageNumber);
+  const { loading, error, feeds, hasMore } = useFeedsSearch(pageNumber);
 
   const observer = useRef(null);
   const lastFeedElementRef = useCallback(
@@ -30,13 +29,11 @@ export default function Feeds() {
     [loading, hasMore]
   );
 
-  function handleRefresh() {
-    if (pageNumber === 1) {
-      setPageNumber(2);
-    }
-    refreshFeeds();
-    setPageNumber(1);
-  }
+  const handleRefresh = useCallback(() => {
+    setTimeout(() => {
+      setPageNumber(1);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     if (error) {

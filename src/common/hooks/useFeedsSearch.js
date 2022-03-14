@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useFeedsSearch(pageNumber) {
   const [loading, setLoading] = useState(true);
@@ -7,11 +7,15 @@ export default function useFeedsSearch(pageNumber) {
   const [feeds, setFeeds] = useState([]);
   const [hasMore, setHasMore] = useState(false);
 
-  const refreshFeeds = () => {
+  const reset = useCallback(async () => {
     setFeeds([]);
-  };
+  }, []);
 
   useEffect(() => {
+    if (pageNumber === 1) {
+      reset();
+    }
+
     setLoading(true);
     setError(false);
     let cancel;
@@ -25,7 +29,9 @@ export default function useFeedsSearch(pageNumber) {
       }),
     })
       .then((res) => {
-        setFeeds((prevFeeds) => [...prevFeeds, ...res.data.feeds]);
+        setFeeds((prevFeeds) => [
+          ...new Set([...prevFeeds, ...res.data.feeds]),
+        ]);
         setHasMore(res.data.totalPages > res.data.currentPage);
         setLoading(false);
       })
@@ -35,7 +41,7 @@ export default function useFeedsSearch(pageNumber) {
       });
 
     return () => cancel();
-  }, [pageNumber]);
+  }, [pageNumber, reset]);
 
-  return { loading, error, feeds, hasMore, refreshFeeds };
+  return { loading, error, feeds, hasMore, reset };
 }
