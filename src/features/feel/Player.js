@@ -34,18 +34,24 @@ export default function Player() {
   useEffect(() => {
     async function setYoutubeUrl() {
       const query = `${currentWeather.weather[0].main}`;
-      const { data, queryString } = await getYoutube(query);
-      setTags(
-        queryString.replace('[playlist],music', '').split(',').join(' #')
-      );
-      if (data && data.items.length > 0) {
-        const newUrls = [];
-        data.items.forEach((item) => {
-          const newUrl = `https://youtu.be/${item.id.videoId}`;
-          newUrls.push(newUrl);
-        });
-        setUrl(newUrls);
-      } else {
+
+      try {
+        const { data, queryString } = await getYoutube(query);
+        setTags(
+          queryString.replace('[playlist],music', '').split(',').join(' #')
+        );
+        if (data && data.items.length > 0) {
+          const newUrls = [];
+          data.items.forEach((item) => {
+            const newUrl = `https://youtu.be/${item.id.videoId}`;
+            newUrls.push(newUrl);
+          });
+          setUrl(newUrls);
+        } else {
+          const newUrl = 'https://youtu.be/9xABtV74XS0';
+          setUrl(newUrl);
+        }
+      } catch (error) {
         const newUrl = 'https://youtu.be/9xABtV74XS0';
         setUrl(newUrl);
       }

@@ -98,7 +98,15 @@ export default function ButtonMore({ feed, editFunc }) {
 }
 
 ButtonMore.propTypes = {
-  feed: Proptypes.node.isRequired,
+  feed: Proptypes.shape({
+    _id: Proptypes.string,
+    writerId: Proptypes.string,
+    writerAvatar: Proptypes.string,
+    writerName: Proptypes.string,
+    description: Proptypes.string,
+    tag: Proptypes.string,
+    updatedAt: Proptypes.string,
+  }).isRequired,
   editFunc: Proptypes.func.isRequired,
 };
 

@@ -50,7 +50,15 @@ export default function Feed({ feed }) {
 }
 
 Feed.propTypes = {
-  feed: Proptypes.node.isRequired,
+  feed: Proptypes.shape({
+    _id: Proptypes.string,
+    writerId: Proptypes.string,
+    writerAvatar: Proptypes.string,
+    writerName: Proptypes.string,
+    description: Proptypes.string,
+    tag: Proptypes.string,
+    updatedAt: Proptypes.string,
+  }).isRequired,
 };
 
 const StyledFeed = styled.div`
