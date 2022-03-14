@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { AiOutlinePlayCircle, AiOutlinePauseCircle } from 'react-icons/ai';
 import { FiRefreshCw } from 'react-icons/fi';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
@@ -13,6 +14,7 @@ export default function Feeds() {
   const FeedsSwal = withReactContent(Swal);
   const [pageNumber, setPageNumber] = useState(1);
   const [refreshCount, setRefreshCount] = useState(30);
+  const [playAutoRefresh, setPlayAutoRefresh] = useState(true);
   const { loading, error, feeds, hasMore } = useFeedsSearch(pageNumber);
 
   const observer = useRef(null);
@@ -44,13 +46,13 @@ export default function Feeds() {
     }
 
     const refreshCountDown = setInterval(() => {
-      setRefreshCount((current) => current - 1);
+      if (playAutoRefresh) setRefreshCount((current) => current - 1);
     }, 1000);
 
     return () => {
       clearInterval(refreshCountDown);
     };
-  }, [handleRefresh, refreshCount]);
+  }, [handleRefresh, refreshCount, playAutoRefresh]);
 
   useEffect(() => {
     if (error) {
@@ -68,8 +70,23 @@ export default function Feeds() {
         <FeedEdit callback={handleRefresh} />
       </div>
       <div className='refresh'>
-        <div className='refresh-description'>
-          {`${refreshCount}초 후 자동 새로고침 됩니다.`}
+        <div className='refresh-setting'>
+          {playAutoRefresh && (
+            <AiOutlinePauseCircle
+              className='icon'
+              onClick={() => setPlayAutoRefresh(false)}
+            />
+          )}
+          {!playAutoRefresh && (
+            <AiOutlinePlayCircle
+              className='icon'
+              onClick={() => setPlayAutoRefresh(true)}
+            />
+          )}
+          <div className='refresh-description'>
+            {playAutoRefresh && `${refreshCount}초 후 자동 새로고침 됩니다.`}
+            {!playAutoRefresh && '자동 새로고침이 정지되었습니다.'}
+          </div>
         </div>
         <ButtonAuth onClick={handleRefresh}>
           <FiRefreshCw className='icon' />
@@ -120,8 +137,19 @@ const StyledFeeds = styled.div`
   .refresh {
     width: 94%;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
+
+    .refresh-setting {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+
+      .icon {
+        margin-right: 0.2rem;
+        cursor: pointer;
+      }
+    }
 
     .refresh-description {
       font-size: small;
