@@ -10,13 +10,10 @@ import FeedEdit from './FeedEdit';
 export default function Feeds() {
   const FeedsSwal = withReactContent(Swal);
 
-  const [query, setQuery] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { loading, error, feeds, hasMore, refreshFeeds } = useFeedsSearch(
-    query,
-    pageNumber
-  );
+  const { loading, error, feeds, hasMore, refreshFeeds } =
+    useFeedsSearch(pageNumber);
 
   const observer = useRef(null);
   const lastFeedElementRef = useCallback(
@@ -34,12 +31,10 @@ export default function Feeds() {
   );
 
   function handleRefresh() {
+    if (pageNumber === 1) {
+      setPageNumber(2);
+    }
     refreshFeeds();
-    setPageNumber(1);
-  }
-
-  function handleSearch(e) {
-    setQuery(e.target.value);
     setPageNumber(1);
   }
 
@@ -56,12 +51,11 @@ export default function Feeds() {
   return (
     <StyledFeeds>
       <div className='feed-editor'>
-        <FeedEdit />
-        <input type='text' value={query} onChange={handleSearch} />
-        <button type='button' onClick={handleRefresh}>
-          새로고침
-        </button>
+        <FeedEdit callback={handleRefresh} />
       </div>
+      <button type='button' onClick={handleRefresh}>
+        새로고침
+      </button>
       <div className='feed-list'>
         {Array.from(feeds).map((feed, index) => {
           if (feeds.length === index + 1) {

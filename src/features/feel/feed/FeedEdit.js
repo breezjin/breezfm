@@ -1,3 +1,4 @@
+import Proptypes from 'prop-types';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -5,7 +6,7 @@ import styled from 'styled-components';
 
 import { saveFeed } from '../../../common/api/feedApis';
 
-export default function FeedEdit() {
+export default function FeedEdit({ callback }) {
   const [enteredText, setEnteredText] = useState('');
 
   // const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -25,6 +26,7 @@ export default function FeedEdit() {
 
     saveFeed(newFeed);
     setEnteredText('');
+    callback();
   }
 
   return (
@@ -44,10 +46,13 @@ export default function FeedEdit() {
           입력하기
         </button>
       </div>
-      <div>{enteredText}</div>
     </StyledFeedEdit>
   );
 }
+
+FeedEdit.propTypes = {
+  callback: Proptypes.func.isRequired,
+};
 
 const StyledFeedEdit = styled.form`
   width: 100%;
@@ -65,15 +70,12 @@ const StyledFeedEdit = styled.form`
     .text-area {
       flex-grow: 1;
       width: 100%;
-      min-height: 2rem;
+      min-height: 3rem;
+      font-family: Roboto, 'Helvetica Neue', sans-serif;
       white-space: pre-wrap;
       border-radius: 0.3rem;
       resize: none;
       outline: none;
-
-      ::placeholder {
-        font-family: unset;
-      }
     }
 
     .btn {
