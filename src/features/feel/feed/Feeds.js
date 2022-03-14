@@ -12,6 +12,7 @@ import FeedEdit from './FeedEdit';
 export default function Feeds() {
   const FeedsSwal = withReactContent(Swal);
   const [pageNumber, setPageNumber] = useState(1);
+  const [refreshCount, setRefreshCount] = useState(30);
   const { loading, error, feeds, hasMore } = useFeedsSearch(pageNumber);
 
   const observer = useRef(null);
@@ -30,10 +31,26 @@ export default function Feeds() {
   );
 
   const handleRefresh = useCallback(() => {
+    setRefreshCount(30);
+    setPageNumber(2);
     setTimeout(() => {
       setPageNumber(1);
     }, 500);
   }, []);
+
+  useEffect(() => {
+    if (refreshCount === 0) {
+      handleRefresh();
+    }
+
+    const refreshCountDown = setInterval(() => {
+      setRefreshCount((current) => current - 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(refreshCountDown);
+    };
+  }, [handleRefresh, refreshCount]);
 
   useEffect(() => {
     if (error) {
@@ -52,7 +69,7 @@ export default function Feeds() {
       </div>
       <div className='refresh'>
         <div className='refresh-description'>
-          버튼을 누르면 최신 피드를 볼 수 있습니다.
+          {`${refreshCount}초 후 자동 새로고침 됩니다.`}
         </div>
         <ButtonAuth onClick={handleRefresh}>
           <FiRefreshCw className='icon' />
