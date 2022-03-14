@@ -51,7 +51,7 @@ export default function Auth() {
       denyButtonColor: 'gray',
       showConfirmButton: true,
       confirmButtonText: '네, 로그아웃 할래요.',
-      confirmButtonColor: 'red',
+      confirmButtonColor: '#cc1c00',
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('BREEZ_TOKEN');

@@ -56,7 +56,9 @@ export default function ButtonMore({ feed, editFunc }) {
       titleText: '피드를 정말 삭제할까요?',
       text: '확인을 누르면 영구적으로 삭제 됩니다.',
       confirmButtonText: '확인',
-      denyButtonText: '취소',
+      confirmButtonColor: '#cc1c00',
+      showCancelButton: true,
+      cancelButtonText: '취소',
     }).then((result) => {
       if (result.isConfirmed) {
         deleteFeed(feed);

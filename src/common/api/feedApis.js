@@ -44,7 +44,7 @@ export async function deleteFeed(feed) {
   const BREEZ_TOKEN = localStorage.getItem('BREEZ_TOKEN');
 
   try {
-    const response = await axios.post(`/feeds/${feed._id}`, {
+    const response = await axios.delete(`/feeds/${feed._id}`, {
       headers: {
         Authorization: `Bearer ${BREEZ_TOKEN}`,
       },
