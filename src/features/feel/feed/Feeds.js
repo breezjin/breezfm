@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { FiRefreshCw } from 'react-icons/fi';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import ButtonAuth from '../../../common/components/buttons/ButtonAuth';
 import useFeedsSearch from '../../../common/hooks/useFeedsSearch';
 import Feed from './Feed';
 import FeedEdit from './FeedEdit';
@@ -50,9 +52,15 @@ export default function Feeds() {
       <div className='feed-editor'>
         <FeedEdit callback={handleRefresh} />
       </div>
-      <button type='button' onClick={handleRefresh}>
-        새로고침
-      </button>
+      <div className='refresh'>
+        <div className='refresh-description'>
+          버튼을 누르면 최신 피드를 볼 수 있습니다.
+        </div>
+        <ButtonAuth onClick={handleRefresh}>
+          <FiRefreshCw className='icon' />
+          새로고침
+        </ButtonAuth>
+      </div>
       <div className='feed-list'>
         {Array.from(feeds).map((feed, index) => {
           if (feeds.length === index + 1) {
@@ -102,16 +110,32 @@ const StyledFeeds = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
 
   .feed-editor {
     width: 94%;
-    margin-top: 1rem;
+    margin: 1rem 0rem 1rem 0rem;
+  }
+
+  .refresh {
+    width: 94%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    .refresh-description {
+      font-size: small;
+      color: grey;
+      margin-right: 1rem;
+    }
+  }
+
+  .icon {
+    margin-right: 0.4rem;
   }
 
   .feed-list {
     width: 94%;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0rem 1rem 0rem;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
