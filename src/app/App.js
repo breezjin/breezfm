@@ -34,9 +34,11 @@ const StyledApp = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     .player {
       width: 25%;
+      min-width: 300px;
       height: calc(100vh - 3rem);
       display: flex;
       justify-content: center;
@@ -44,6 +46,7 @@ const StyledApp = styled.div`
 
     .pages {
       width: 75%;
+      min-width: 300px;
       height: calc(100vh - 3rem);
       display: flex;
       justify-content: center;
