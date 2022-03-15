@@ -4,13 +4,19 @@ import styled from 'styled-components';
 
 import BgImgs from '../features/background/BgImgs';
 import Header from '../features/header/Header';
+import Player from '../features/player/Player';
 
 export default function App() {
   return (
     <StyledApp>
       <Header />
-      <div className='pages'>
-        <Outlet />
+      <div className='body-area'>
+        <div className='player'>
+          <Player />
+        </div>
+        <div className='pages'>
+          <Outlet />
+        </div>
       </div>
       <BgImgs />
     </StyledApp>
@@ -23,11 +29,24 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
 
-  .pages {
+  .body-area {
     width: 100%;
-    height: calc(100vh - 3rem);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .player {
+      width: 25%;
+      height: calc(100vh - 3rem);
+      display: flex;
+      justify-content: center;
+    }
+
+    .pages {
+      width: 75%;
+      height: calc(100vh - 3rem);
+      display: flex;
+      justify-content: center;
+    }
   }
 `;

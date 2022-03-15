@@ -116,15 +116,12 @@ export default function Feeds() {
 }
 
 const StyledFeeds = styled.div`
-  z-index: 10;
-  position: absolute;
-  top: 4rem;
-  right: 2rem;
-  width: 25%;
+  width: 70%;
   min-width: 400px;
   max-height: calc(100vh - 5rem);
   background-color: #000000a2;
   border-radius: 0.3rem;
+  margin: 1rem 2rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;

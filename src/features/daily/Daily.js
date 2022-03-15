@@ -13,10 +13,11 @@ export default function Daily() {
 
 const StyledDaily = styled.div`
   z-index: 5;
-  width: 90%;
-  height: 90%;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
   background-color: #000000a2;
   border-radius: 0.3rem;
+  margin: 1rem 0rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

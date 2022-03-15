@@ -144,13 +144,12 @@ export default function Player() {
 
 const StyledPlayer = styled.div`
   z-index: 10;
-  position: absolute;
-  top: 4rem;
-  left: 2rem;
-  width: 25%;
+  width: 90%;
   min-width: 300px;
+  height: fit-content;
   background-color: #000000a2;
   border-radius: 0.3rem;
+  margin: 1rem 0rem 0rem 0rem;
   display: flex;
   flex-direction: column;
 

@@ -2,21 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Feeds from './feed/Feeds';
-import Player from './Player';
 
 export default function Feel() {
   return (
     <StyledFeel>
-      <Player />
-      <Feeds />
+      <div className='left' />
+      <div className='right'>
+        <Feeds />
+      </div>
     </StyledFeel>
   );
 }
 
 const StyledFeel = styled.div`
-  background-color: #000000a2;
-  border-radius: 0.3rem;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+
+  .left {
+    width: 50%;
+  }
+
+  .right {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
