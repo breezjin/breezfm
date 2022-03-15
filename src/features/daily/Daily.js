@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export default function Daily() {
   return (
     <StyledDaily>
-      <div>하루에 한곡씩, 찾아가는 선곡 서비스가 기다립니다.</div>
-      <div>나중에 선보일 일간 Daily BREEZ.</div>
+      <div>하루에 한곡씩, 찾아가는 선곡 서비스,</div>
+      <div>일간 Daily BREEZ 가 준비 중입니다.</div>
       <div>기대해 주세요 🤗</div>
     </StyledDaily>
   );
