@@ -1,15 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Menu() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
     <StyledMenu>
       <li>
         <div
-          className='menu'
+          className={pathname === '/about' ? 'menu-current' : 'menu'}
           role='button'
           onClick={() => navigate('/about')}
           onKeyDown={() => navigate('/about')}
@@ -20,7 +21,7 @@ export default function Menu() {
       </li>
       <li>
         <div
-          className='menu'
+          className={pathname === '/feel' ? 'menu-current' : 'menu'}
           role='button'
           onClick={() => navigate('/feel')}
           onKeyDown={() => navigate('/feel')}
@@ -31,7 +32,7 @@ export default function Menu() {
       </li>
       <li>
         <div
-          className='menu'
+          className={pathname === '/daily' ? 'menu-current' : 'menu'}
           role='button'
           onClick={() => navigate('/daily')}
           onKeyDown={() => navigate('/daily')}
@@ -42,7 +43,7 @@ export default function Menu() {
       </li>
       <li>
         <div
-          className='menu'
+          className={pathname === '/videos' ? 'menu-current' : 'menu'}
           role='button'
           onClick={() => navigate('/videos')}
           onKeyDown={() => navigate('/videos')}
@@ -81,5 +82,16 @@ const StyledMenu = styled.div`
       border-color: beige;
       box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
     }
+  }
+
+  .menu-current {
+    width: fit-content;
+    height: 100%;
+    font-size: large;
+    font-weight: 500;
+    border-color: beige;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    display: flex;
+    align-items: center;
   }
 `;
