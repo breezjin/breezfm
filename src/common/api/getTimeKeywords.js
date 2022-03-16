@@ -19,7 +19,7 @@ const daysKR = {
 
 const hoursKR = {
   morning: `아침`,
-  noon: `점심`,
+  noon: `정오`,
   afternoon: `오후`,
   dinner: `저녁`,
   night: `밤`,
