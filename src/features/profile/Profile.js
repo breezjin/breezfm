@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 // import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // import Swal from 'sweetalert2';
 // import withReactContent from 'sweetalert2-react-content';
@@ -10,13 +11,18 @@ import MyFeeds from './MyFeeds';
 
 export default function Profile() {
   // const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const ProfileSwal = withReactContent(Swal);
 
-  // const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   // const myId = useSelector((state) => state.login.userId);
   const myAvatar = useSelector((state) => state.login.userAvatar);
   const myName = useSelector((state) => state.login.userName);
   const myEmail = useSelector((state) => state.login.userEmail);
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/');
+  }, [isLoggedIn, navigate]);
 
   return (
     <StyledProfile>
