@@ -14,7 +14,7 @@ export default function FeedEdit({ callback }) {
   const myAvatar = useSelector((state) => state.login.userAvatar);
   const myName = useSelector((state) => state.login.userName);
 
-  function saveNewFeed() {
+  async function saveNewFeed() {
     const newFeed = {
       writerId: myId,
       writerAvatar: myAvatar,
@@ -24,11 +24,10 @@ export default function FeedEdit({ callback }) {
       updatedAt: new Date().toISOString(),
     };
 
-    saveFeed(newFeed);
+    await saveFeed(newFeed).then((res) => {
+      if (res.data.result === 'ok') callback();
+    });
     setEnteredText('');
-    setTimeout(() => {
-      callback();
-    }, 0);
   }
 
   return (
