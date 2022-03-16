@@ -20,6 +20,13 @@ export const loginSlice = createSlice({
       state.userName = action.payload.userName;
       state.userEmail = action.payload.userEmail;
     },
+    userUpdated: (state, action) => {
+      state.isLoggedIn = true;
+      state.userId = action.payload.userId;
+      state.userAvatar = action.payload.userAvatar;
+      state.userName = action.payload.userName;
+      state.userEmail = action.payload.userEmail;
+    },
     userLoggedOut: (state) => {
       state.isLoggedIn = false;
       state.userId = null;
@@ -59,6 +66,6 @@ export async function checkToken(dispatch) {
   }
 }
 
-export const { userLoggedIn, userLoggedOut } = loginSlice.actions;
+export const { userLoggedIn, userUpdated, userLoggedOut } = loginSlice.actions;
 
 export default loginSlice.reducer;

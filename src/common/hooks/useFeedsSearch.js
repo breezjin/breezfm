@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 
-export default function useFeedsSearch(pageNumber) {
+export default function useFeedsSearch(userId, pageNumber) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [feeds, setFeeds] = useState([]);
@@ -23,7 +23,7 @@ export default function useFeedsSearch(pageNumber) {
     axios({
       method: 'GET',
       url: '/feeds',
-      params: { page: pageNumber },
+      params: { user: userId, page: pageNumber },
       cancelToken: new axios.CancelToken((c) => {
         cancel = c;
       }),
@@ -41,7 +41,7 @@ export default function useFeedsSearch(pageNumber) {
       });
 
     return () => cancel();
-  }, [pageNumber, reset]);
+  }, [userId, pageNumber, reset]);
 
   return { loading, error, feeds, hasMore, reset };
 }

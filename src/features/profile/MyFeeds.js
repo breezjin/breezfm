@@ -1,21 +1,23 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { AiOutlinePlayCircle, AiOutlinePauseCircle } from 'react-icons/ai';
 import { FiRefreshCw } from 'react-icons/fi';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import ButtonAuth from '../../../common/components/buttons/ButtonAuth';
-import useFeedsSearch from '../../../common/hooks/useFeedsSearch';
-import Feed from './Feed';
-import FeedEdit from './FeedEdit';
+import ButtonAuth from '../../common/components/buttons/ButtonAuth';
+import useFeedsSearch from '../../common/hooks/useFeedsSearch';
+import Feed from '../feel/feed/Feed';
+import FeedEdit from '../feel/feed/FeedEdit';
 
 export default function Feeds() {
   const FeedsSwal = withReactContent(Swal);
   const [pageNumber, setPageNumber] = useState(1);
   const [refreshCount, setRefreshCount] = useState(30);
   const [playAutoRefresh, setPlayAutoRefresh] = useState(true);
-  const { loading, error, feeds, hasMore } = useFeedsSearch(null, pageNumber);
+  const myId = useSelector((state) => state.login.userId);
+  const { loading, error, feeds, hasMore } = useFeedsSearch(myId, pageNumber);
 
   const observer = useRef(null);
   const lastFeedElementRef = useCallback(
@@ -116,19 +118,17 @@ export default function Feeds() {
 }
 
 const StyledFeeds = styled.div`
-  width: 70%;
-  min-width: 400px;
-  max-height: calc(100vh - 5rem);
-  background-color: #000000a2;
+  width: 100%;
+  height: 100%;
   border-radius: 0.3rem;
-  margin: 1rem 2rem 0rem 0rem;
+  margin: 0rem 1rem 0rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .feed-editor {
     width: 94%;
-    margin: 1rem 0rem 1rem 0rem;
+    margin: 0rem 0rem 1rem 0rem;
   }
 
   .refresh {
@@ -161,6 +161,7 @@ const StyledFeeds = styled.div`
 
   .feed-list {
     width: 94%;
+    height: 75%;
     margin: 0.5rem 0rem 1rem 0rem;
     overflow-y: scroll;
     display: flex;

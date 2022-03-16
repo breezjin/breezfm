@@ -8,6 +8,14 @@ export async function getFeed(feedId) {
   }
 }
 
+export async function getUserFeeds(userId) {
+  try {
+    return await axios.get(`/feeds/user/${userId}`);
+  } catch (error) {
+    return error.message;
+  }
+}
+
 export async function saveFeed(newFeed) {
   const BREEZ_TOKEN = localStorage.getItem('BREEZ_TOKEN');
 

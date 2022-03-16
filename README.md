@@ -6,13 +6,12 @@
 
 `Music`, `Streaming`, `Feed`
 
-## 기능
+## 주요 기능
 
-- 위치정보 기반으로 사용자의 위치와 날씨를 파악해서 음악이 자동으로 스트리밍 됩니다.
-- 파악한 사용자의 위치와 날씨에 따라 적절한 분위기의 배경 이미지와 비주얼이펙트가 구성 됩니다.
-- 기본 선택된 무드(감정상태)를 변경해서 다른 분위기로 전환할 수도 있습니다.
+- 위치정보 기반으로 사용자의 위치와 날씨를 파악해서 음악이 자동으로 스트리밍 됩니다. (1시간 단위 갱신)
+- 파악한 사용자의 위치와 날씨에 따라 적절한 분위기의 배경 이미지가 구성되고 자동으로 전환 됩니다.
 - 음악을 듣다가 드는 소회, 잡담 등을 이 공간에 함께있는 사람들과 Feed를 통해 나눌 수 있습니다.
-- Feed에서 작성하는 글 등은 회원가입을 통해서만 가능합니다.
+- Feed에서 글 작성하기 등은 회원가입을 통해서만 가능합니다.
 
 ## 기술 스택
 
@@ -21,7 +20,6 @@
   - React
   - React Redux / Redux Toolkit
   - styled-components
-  - amime.js
   - sweetalert2
   - Dayjs
   - Axios
@@ -38,8 +36,6 @@
 - API
   - Open Weather Map api
   - unsplash api
-  - Shazam api
-  - Auto DJ api
   - youtube api
 - Test
   - Front: Jest, React Testing library
