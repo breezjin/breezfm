@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -12,6 +13,7 @@ import { userLoggedOut } from '../login/loginSlice';
 
 export default function Auth() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const AuthSwal = withReactContent(Swal);
 
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -56,6 +58,7 @@ export default function Auth() {
       if (result.isConfirmed) {
         localStorage.removeItem('BREEZ_TOKEN');
         dispatch(userLoggedOut());
+        navigate('/');
       }
     });
   }
