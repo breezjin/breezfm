@@ -59,6 +59,9 @@ export default function Player() {
 
     if (currentWeather) {
       setYoutubeUrl();
+    } else {
+      const newUrl = 'https://youtu.be/9xABtV74XS0';
+      setUrl(newUrl);
     }
   }, [currentWeather]);
 
@@ -126,9 +129,11 @@ export default function Player() {
         <div className='content-notice'>
           {url === 'https://youtu.be/9xABtV74XS0' && (
             <p>
-              🤔 적당한 음악을 찾지 못해서 기본 음악이 송출되는 중입니다. query
-              세팅이 더 잘 구성되어야 하겠어요. 흠... 혹은 Youtube api가 막혀서
-              기본 음악이 나가는 중입니다 😭
+              🤔 현재 이런 상황이에요.
+              <li>위치정보공유를 동의하지 않으셨거나 😥</li>
+              <li>적당한 음악을 찾지 못했거나 🫣</li>
+              <li>Youtube api가 막혔거나 😱</li>
+              해서 기본 음악이 나가는 중입니다 😭
             </p>
           )}
           <p>
@@ -198,6 +203,10 @@ const StyledPlayer = styled.div`
   .content-notice {
     font-size: small;
     padding: 1rem;
+
+    li {
+      margin-left: 1rem;
+    }
   }
 
   .tag {
