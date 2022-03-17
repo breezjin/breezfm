@@ -38,7 +38,7 @@ UnsplashAttribute.propTypes = {
 const StyledUnsplashAttribute = styled.div`
   z-index: 5;
   position: absolute;
-  left: 2rem;
+  left: 1rem;
   bottom: 1rem;
   background-color: black;
 
