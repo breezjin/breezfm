@@ -118,8 +118,8 @@ export default function Feeds() {
 }
 
 const StyledFeeds = styled.div`
+  flex-grow: 1;
   width: 100%;
-  height: 100%;
   border-radius: 0.3rem;
   margin: 0rem 1rem 0rem 1rem;
   display: flex;
@@ -161,7 +161,7 @@ const StyledFeeds = styled.div`
 
   .feed-list {
     width: 94%;
-    height: 75%;
+    max-height: calc(100vh - 18.5rem);
     margin: 0.5rem 0rem 1rem 0rem;
     overflow-y: scroll;
     display: flex;

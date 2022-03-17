@@ -84,6 +84,7 @@ const StyledProfile = styled.div`
 
   .profile-feeds {
     width: 50%;
+    height: 100%;
     background-color: #000000a2;
     border-radius: 0.3rem;
     display: flex;
