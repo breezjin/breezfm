@@ -48,6 +48,7 @@ export default function Weather() {
           className='weather-icon'
           src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
           alt='weather-icon'
+          loading='lazy'
         />
       )}
       {currentWeather && `${currentWeather.weather[0].description}`}
