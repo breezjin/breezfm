@@ -215,15 +215,13 @@ export default function Player() {
           {currentPlayerTarget === 'youtube' && (
             <p>
               위치정보 동의를 해주시면 지금 당신이 있는 공간의 분위기를 살펴서
-              적절한 음악이 자동 재생됩니다. 혹시 플레이가 안된다면 Feel BREEZ
-              버튼을 눌렀다가 다시 Feel NOW를 클릭해주세요.
+              적절한 음악이 자동 재생됩니다.
             </p>
           )}
           {currentPlayerTarget === 'breez' && (
             <p>
-              BREEZ에서 준비한 음악이 송출 중입니다. 서버 퍼포먼스 문제로 음악과
-              음악정보가 맞지 않는 경우가 있을 수 있습니다. 보다 원활한 서버로
-              이전하기 전까지는 양해 부탁 드립니다.
+              BREEZ에서 준비한 음악이 송출 중입니다. 간혹 서버 퍼포먼스 문제로
+              음악과 음악정보가 맞지 않을 수도 있습니다.
             </p>
           )}
           {currentPlayerTarget === 'youtube' && <p className='tag'> {tags}</p>}
