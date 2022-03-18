@@ -322,7 +322,7 @@ const StyledPlayer = styled.div`
     }
 
     .controll-volume-notice {
-      font-size: x-small;
+      font-size: small;
     }
   }
 
