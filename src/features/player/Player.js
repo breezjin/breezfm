@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { BsYoutube } from 'react-icons/bs';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
+import { GoRadioTower } from 'react-icons/go';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -231,9 +233,11 @@ export default function Player() {
         {(pathname === '/' || pathname === '/feel') && (
           <>
             <ButtonAuth onClick={() => handleSource('youtube')}>
+              <BsYoutube className='icon' />
               Feel Now
             </ButtonAuth>
             <ButtonAuth onClick={() => handleSource('breez')}>
+              <GoRadioTower className='icon' />
               Feel BREEZ
             </ButtonAuth>
           </>
@@ -344,6 +348,10 @@ const StyledPlayer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .icon {
+    margin-right: 0.4rem;
   }
 
   li {
