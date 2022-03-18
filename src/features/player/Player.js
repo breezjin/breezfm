@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
-import ReactPlayer from 'react-player/youtube';
-import { useSelector } from 'react-redux';
+import ReactPlayer from 'react-player';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import defaultCover from '../../assets/breez-default-cover.png';
+import { getSongInfo, getSongCover } from '../../common/api/getSongInfo';
 import getYoutube from '../../common/api/getYoutube';
+import ButtonAuth from '../../common/components/buttons/ButtonAuth';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
+import { playerChanged } from './playerSlice';
 
 export default function Player() {
-  const [url, setUrl] = useState(null);
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  const currentWeather = useSelector((state) => state.weather.currentWeather);
+  const currentPlayerTarget = useSelector((state) => state.player.target);
+  const currentPlayerUrls = useSelector((state) => state.player.urls);
+
+  const [source, setSource] = useState(null);
   const [tags, setTags] = useState(null);
   const [mute, setMute] = useState(true);
   const [volume, setVolume] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
-  const currentWeather = useSelector((state) => state.weather.currentWeather);
+
+  const [breezSongArtist, setBreezSongArtist] = useState('');
+  const [breezSongTitle, setBreezSongTitle] = useState('');
+  const [breezSongCover, setBreezSongCover] = useState(null);
 
   const handlePlayPause = () => {
     setIsPlay((current) => !current);
@@ -31,39 +46,75 @@ export default function Player() {
     setVolume(1);
   };
 
+  const handleSource = (selectedSource) => {
+    setSource(selectedSource);
+  };
+
   useEffect(() => {
+    setSource('youtube');
+  }, []);
+
+  useEffect(() => {
+    function handlePlayerError() {
+      const newUrl = 'https://youtu.be/9xABtV74XS0';
+      const newPlayer = { target: null, urls: newUrl };
+      dispatch(playerChanged(newPlayer));
+    }
+
     async function setYoutubeUrl() {
+      clearInterval(checkSongInfo);
       const query = `${currentWeather.weather[0].main}`;
 
       try {
         const { data, queryString } = await getYoutube(query);
-        setTags(
-          queryString.replace('[playlist],music', '').split(',').join(' #')
-        );
         if (data && data.items.length > 0) {
           const newUrls = [];
           data.items.forEach((item) => {
             const newUrl = `https://youtu.be/${item.id.videoId}`;
             newUrls.push(newUrl);
           });
-          setUrl(newUrls);
+          const newPlayer = { target: source, urls: newUrls };
+          dispatch(playerChanged(newPlayer));
+          setTags(
+            queryString.replace('[playlist],music', '').split(',').join(' #')
+          );
         } else {
-          const newUrl = 'https://youtu.be/9xABtV74XS0';
-          setUrl(newUrl);
+          handlePlayerError();
         }
       } catch (error) {
-        const newUrl = 'https://youtu.be/9xABtV74XS0';
-        setUrl(newUrl);
+        handlePlayerError();
       }
     }
 
-    if (currentWeather) {
-      setYoutubeUrl();
-    } else {
-      const newUrl = 'https://youtu.be/9xABtV74XS0';
-      setUrl(newUrl);
+    const checkSongInfo = setInterval(async () => {
+      const { artist, title } = await getSongInfo();
+      if (breezSongArtist !== artist || breezSongTitle !== title) {
+        const cover = await getSongCover(artist, title);
+        setBreezSongArtist(artist);
+        setBreezSongTitle(title);
+        setBreezSongCover(cover);
+      }
+    }, 5000);
+
+    async function setBreezUrl() {
+      const newUrl = 'https://stream.zeno.fm/6trddptrsg0uv';
+      const newPlayer = { target: source, urls: newUrl };
+      dispatch(playerChanged(newPlayer));
+      checkSongInfo();
     }
-  }, [currentWeather]);
+
+    if (currentWeather && source === 'youtube') {
+      setYoutubeUrl();
+    } else if (source === 'breez') {
+      setBreezUrl();
+    } else {
+      handlePlayerError();
+    }
+
+    return () => {
+      clearInterval(checkSongInfo);
+    };
+  }, [breezSongArtist, breezSongTitle, currentWeather, dispatch, source]);
 
   useEffect(() => {
     if (volume > 0) {
@@ -73,13 +124,20 @@ export default function Player() {
 
   return (
     <StyledPlayer>
-      <div className='player-wrapper'>
-        <div className='player-wrapper-inner'>
+      {source === 'breez' && (
+        <div className='breez-song-info'>
+          <img
+            className='cover'
+            src={breezSongCover || defaultCover}
+            alt={`${breezSongArtist} - ${breezSongTitle}`}
+          />
+          <div className='artist'>{breezSongArtist}</div>
+          <div className='title'>{breezSongTitle}</div>
           <ReactPlayer
             className='react-player'
-            url={url}
-            width='100%'
-            height='100%'
+            url={currentPlayerUrls}
+            width='0'
+            height='0'
             playing={isPlay}
             muted={mute}
             volume={volume}
@@ -87,7 +145,24 @@ export default function Player() {
             pip={true}
           />
         </div>
-      </div>
+      )}
+      {source === 'youtube' && (
+        <div className='player-wrapper'>
+          <div className='player-wrapper-inner'>
+            <ReactPlayer
+              className='react-player'
+              url={currentPlayerUrls}
+              width='100%'
+              height='100%'
+              playing={isPlay}
+              muted={mute}
+              volume={volume}
+              loop={true}
+              pip={true}
+            />
+          </div>
+        </div>
+      )}
       <div className='controller-wrapper'>
         <div className='controll-volume'>
           <div
@@ -119,7 +194,7 @@ export default function Player() {
           </div>
         </div>
         {volume === 0 && (
-          <div className='content-notice'>
+          <div className='controll-volume-notice'>
             ⚠️ 음소거 상태 입니다. 볼륨을 높여주세요~
           </div>
         )}
@@ -127,21 +202,44 @@ export default function Player() {
       </div>
       <div className='content-wrapper'>
         <div className='content-notice'>
-          {url === 'https://youtu.be/9xABtV74XS0' && (
+          {!currentPlayerTarget && (
             <p>
               🤔 현재 이런 상황이에요.
-              <li>위치정보공유를 동의하지 않으셨거나 😥</li>
+              <li>위치정보공유를 동의하지 않았거나 😥</li>
               <li>적당한 음악을 찾지 못했거나 🫣</li>
               <li>Youtube api가 막혔거나 😱</li>
-              해서 기본 음악이 나가는 중입니다 😭
+              해서 기본 음악이 나가는 중입니다 🤗
             </p>
           )}
-          <p>
-            현재 breez.fm 개편 중입니다. 위치정보 동의를 해주시면 지금 당신이
-            있는 공간의 분위기를 살펴서 적절한 음악이 자동 재생됩니다.
-          </p>
-          <p className='tag'>{tags}</p>
+          <p>현재 breez.fm 개편 중입니다.</p>
+          {currentPlayerTarget === 'youtube' && (
+            <p>
+              위치정보 동의를 해주시면 지금 당신이 있는 공간의 분위기를 살펴서
+              적절한 음악이 자동 재생됩니다. 혹시 플레이가 안된다면 Feel BREEZ
+              버튼을 눌렀다가 다시 Feel NOW를 클릭해주세요.
+            </p>
+          )}
+          {currentPlayerTarget === 'breez' && (
+            <p>
+              BREEZ에서 준비한 음악이 송출 중입니다. 서버 퍼포먼스 문제로 음악과
+              음악정보가 맞지 않는 경우가 있을 수 있습니다. 보다 원활한 서버로
+              이전하기 전까지는 양해 부탁 드립니다.
+            </p>
+          )}
+          {currentPlayerTarget === 'youtube' && <p className='tag'> {tags}</p>}
         </div>
+      </div>
+      <div className='controller-source-selector'>
+        {(pathname === '/' || pathname === '/feel') && (
+          <>
+            <ButtonAuth onClick={() => handleSource('youtube')}>
+              Feel Now
+            </ButtonAuth>
+            <ButtonAuth onClick={() => handleSource('breez')}>
+              Feel BREEZ
+            </ButtonAuth>
+          </>
+        )}
       </div>
     </StyledPlayer>
   );
@@ -157,6 +255,33 @@ const StyledPlayer = styled.div`
   margin: 1rem 0rem 0rem 0rem;
   display: flex;
   flex-direction: column;
+
+  .breez-song-info {
+    position: relative;
+    width: 100%;
+    margin: 1rem 0rem 0rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    .cover {
+      width: calc(100% - 3rem);
+    }
+
+    .artist {
+      width: calc(100% - 3rem);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .title {
+      width: calc(100% - 3rem);
+      font-size: small;
+      text-align: center;
+    }
+  }
 
   .player-wrapper {
     position: relative;
@@ -192,24 +317,38 @@ const StyledPlayer = styled.div`
       .controll-volume-minmax-btn {
         font-size: 1.5rem;
         margin-top: 4px;
+        cursor: pointer;
       }
+    }
+
+    .controll-volume-notice {
+      font-size: x-small;
     }
   }
 
   .content-wrapper {
     padding: 1rem 1rem 1rem 1rem;
-  }
 
-  .content-notice {
-    font-size: small;
-    padding: 1rem;
+    .content-notice {
+      font-size: small;
+      padding: 0rem 1rem;
+    }
 
-    li {
-      margin-left: 1rem;
+    .tag {
+      color: #a0a0a0;
     }
   }
 
-  .tag {
-    color: #a0a0a0;
+  .controller-source-selector {
+    margin: 0rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 1rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  li {
+    margin-left: 1rem;
   }
 `;
