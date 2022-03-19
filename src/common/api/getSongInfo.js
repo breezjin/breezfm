@@ -13,7 +13,8 @@ export async function getSongCover() {
 export async function getSongInfo() {
   try {
     const response = await axios.get(
-      'https://proxy.radiojar.com/api/stations/61qtsv9abkhvv/now_playing/?callback=jQuery21308417471474422513_1647663979087&_=1647663979088'
+      'https://proxy.radiojar.com/api/stations/61qtsv9abkhvv/now_playing/?callback=jQuery21308417471474422513_1647663979087&_=1647663979088',
+      { headers: { 'Access-Control-Allow-Origin': 'https://breez.fm' } }
     );
 
     const result = JSON.parse(
