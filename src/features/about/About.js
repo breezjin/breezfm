@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export default function About() {
   return (
     <StyledAbout>
-      <div>About</div>
+      <h2>About BREEZ...</h2>
+      <div>will update soon.</div>
     </StyledAbout>
   );
 }
@@ -17,6 +18,8 @@ const StyledAbout = styled.div`
   border-radius: 0.3rem;
   margin: 1rem 0rem 0rem 0rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;

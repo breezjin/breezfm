@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import defaultCover from '../../assets/breez-default-cover.png';
-import { getSongInfo, getSongCover } from '../../common/api/getSongInfo';
+import { getSongInfo } from '../../common/api/getSongInfo';
 import getYoutube from '../../common/api/getYoutube';
 import ButtonAuth from '../../common/components/buttons/ButtonAuth';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
@@ -89,17 +89,16 @@ export default function Player() {
     }
 
     const checkSongInfo = setInterval(async () => {
-      const { artist, title } = await getSongInfo();
+      const { artist, title, thumb } = await getSongInfo();
       if (breezSongArtist !== artist || breezSongTitle !== title) {
-        const cover = await getSongCover(artist, title);
         setBreezSongArtist(artist);
         setBreezSongTitle(title);
-        setBreezSongCover(cover);
+        setBreezSongCover(thumb);
       }
     }, 5000);
 
     async function setBreezUrl() {
-      const newUrl = 'https://stream.zeno.fm/6trddptrsg0uv';
+      const newUrl = 'http://stream.radiojar.com/61qtsv9abkhvv';
       const newPlayer = { target: source, urls: newUrl };
       dispatch(playerChanged(newPlayer));
       checkSongInfo();
@@ -126,7 +125,7 @@ export default function Player() {
 
   return (
     <StyledPlayer>
-      {source === 'breez' && (
+      {currentPlayerTarget === 'breez' && (
         <div className='breez-song-info'>
           <img
             className='cover'
@@ -148,7 +147,7 @@ export default function Player() {
           />
         </div>
       )}
-      {source === 'youtube' && (
+      {currentPlayerTarget === 'youtube' && (
         <div className='player-wrapper'>
           <div className='player-wrapper-inner'>
             <ReactPlayer
@@ -213,7 +212,6 @@ export default function Player() {
               해서 기본 음악이 나가는 중입니다 🤗
             </p>
           )}
-          <p>현재 breez.fm 개편 중입니다.</p>
           {currentPlayerTarget === 'youtube' && (
             <p>
               위치정보 동의를 해주시면 지금 당신이 있는 공간의 분위기를 살펴서

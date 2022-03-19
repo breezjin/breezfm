@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export default function Videos() {
   return (
     <StyledVideos>
-      <div>Videos</div>
+      <h2>BREEZ Videos</h2>
+      <div>will update soon.</div>
     </StyledVideos>
   );
 }
@@ -17,6 +18,8 @@ const StyledVideos = styled.div`
   border-radius: 0.3rem;
   margin: 1rem 0rem 0rem 0rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 `;
