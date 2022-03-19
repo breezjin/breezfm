@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { BsYoutube } from 'react-icons/bs';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
 import { GoRadioTower } from 'react-icons/go';
+import { Bars } from 'react-loader-spinner';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import defaultCover from '../../assets/breez-default-cover.png';
-import { getSongInfo } from '../../common/api/getSongInfo';
+import getSongInfo from '../../common/api/getSongInfo';
 import getYoutube from '../../common/api/getYoutube';
 import ButtonAuth from '../../common/components/buttons/ButtonAuth';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
@@ -28,9 +29,7 @@ export default function Player() {
   const [volume, setVolume] = useState(0);
   const [isPlay, setIsPlay] = useState(true);
 
-  const [breezSongArtist, setBreezSongArtist] = useState('');
-  const [breezSongTitle, setBreezSongTitle] = useState('');
-  const [breezSongCover, setBreezSongCover] = useState(null);
+  const [breezSongInfo, setBreezSongInfo] = useState(null);
 
   const handlePlayPause = () => {
     setIsPlay((current) => !current);
@@ -57,11 +56,10 @@ export default function Player() {
   }, []);
 
   useEffect(() => {
-    function handlePlayerError() {
-      const newUrl = 'https://youtu.be/9xABtV74XS0';
-      const newPlayer = { target: null, urls: newUrl };
-      dispatch(playerChanged(newPlayer));
-    }
+    const checkSongInfo = setInterval(async () => {
+      const songInfo = await getSongInfo();
+      setBreezSongInfo(songInfo);
+    }, 5000);
 
     async function setYoutubeUrl() {
       clearInterval(checkSongInfo);
@@ -81,27 +79,17 @@ export default function Player() {
             queryString.replace('[playlist],music', '').split(',').join(' #')
           );
         } else {
-          handlePlayerError();
+          setSource('breez');
         }
       } catch (error) {
-        handlePlayerError();
+        setSource('breez');
       }
     }
-
-    const checkSongInfo = setInterval(async () => {
-      const { artist, title, thumb } = await getSongInfo();
-      if (breezSongArtist !== artist || breezSongTitle !== title) {
-        setBreezSongArtist(artist);
-        setBreezSongTitle(title);
-        setBreezSongCover(thumb);
-      }
-    }, 5000);
 
     async function setBreezUrl() {
       const newUrl = 'http://stream.radiojar.com/61qtsv9abkhvv';
       const newPlayer = { target: source, urls: newUrl };
       dispatch(playerChanged(newPlayer));
-      checkSongInfo();
     }
 
     if (currentWeather && source === 'youtube') {
@@ -109,13 +97,13 @@ export default function Player() {
     } else if (source === 'breez') {
       setBreezUrl();
     } else {
-      handlePlayerError();
+      setSource('youtube');
     }
 
     return () => {
       clearInterval(checkSongInfo);
     };
-  }, [breezSongArtist, breezSongTitle, currentWeather, dispatch, source]);
+  }, [breezSongInfo, currentWeather, dispatch, source]);
 
   useEffect(() => {
     if (volume > 0) {
@@ -125,15 +113,36 @@ export default function Player() {
 
   return (
     <StyledPlayer>
+      {!currentPlayerTarget && (
+        <div className='loader'>
+          <Bars
+            className='loader-obj'
+            width='50'
+            height='50'
+            color='#db2677'
+            ariaLabel='loading'
+          />
+        </div>
+      )}
       {currentPlayerTarget === 'breez' && (
         <div className='breez-song-info'>
           <img
             className='cover'
-            src={breezSongCover || defaultCover}
-            alt={`${breezSongArtist} - ${breezSongTitle}`}
+            src={
+              breezSongInfo && breezSongInfo.thumb
+                ? breezSongInfo.thumb
+                : defaultCover
+            }
+            alt={
+              breezSongInfo &&
+              `${breezSongInfo.artist} - ${breezSongInfo.title}`
+            }
           />
-          <div className='artist'>{breezSongArtist}</div>
-          <div className='title'>{breezSongTitle}</div>
+          <div className='title'>{breezSongInfo && breezSongInfo.title}</div>
+          <div className='artist'>{breezSongInfo && breezSongInfo.artist}</div>
+          <div className='album'>
+            {breezSongInfo && `${breezSongInfo.album} (${breezSongInfo.year})`}
+          </div>
           <ReactPlayer
             className='react-player'
             url={currentPlayerUrls}
@@ -219,9 +228,8 @@ export default function Player() {
             </p>
           )}
           {currentPlayerTarget === 'breez' && (
-            <p>
-              BREEZ에서 준비한 음악이 송출 중입니다. 간혹 서버 퍼포먼스 문제로
-              음악과 음악정보가 맞지 않을 수도 있습니다.
+            <p className='breez-description'>
+              BREEZ에서 준비한 음악이 송출 중입니다.
             </p>
           )}
           {currentPlayerTarget === 'youtube' && <p className='tag'> {tags}</p>}
@@ -256,6 +264,15 @@ const StyledPlayer = styled.div`
   display: flex;
   flex-direction: column;
 
+  .loader {
+    width: 100%;
+    height: 12rem;
+    margin: 1rem 0rem 0rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .breez-song-info {
     position: relative;
     width: 100%;
@@ -267,19 +284,29 @@ const StyledPlayer = styled.div`
     gap: 0.5rem;
 
     .cover {
+      width: calc(100% - 2rem);
+    }
+
+    .title {
       width: calc(100% - 3rem);
+      text-align: center;
+      font-weight: 800;
+      color: #de4e00;
     }
 
     .artist {
       width: calc(100% - 3rem);
       font-weight: 800;
       text-align: center;
+      margin-bottom: -0.3rem;
     }
 
-    .title {
+    .album {
       width: calc(100% - 3rem);
       font-size: small;
+      font-style: italic;
       text-align: center;
+      color: #a0a0a0;
     }
   }
 
@@ -339,9 +366,13 @@ const StyledPlayer = styled.div`
     }
   }
 
+  .breez-description {
+    text-align: center;
+  }
+
   .controller-source-selector {
     margin: 0rem 0rem 0rem 0rem;
-    padding: 0rem 0rem 1rem 0rem;
+    padding: 0rem 0rem 1.5rem 0rem;
     display: flex;
     justify-content: center;
     align-items: center;
