@@ -87,7 +87,7 @@ export default function Player() {
     }
 
     async function setBreezUrl() {
-      const newUrl = 'http://stream.radiojar.com/61qtsv9abkhvv';
+      const newUrl = 'https://stream.radiojar.com/61qtsv9abkhvv.mp3';
       const newPlayer = { target: source, urls: newUrl };
       dispatch(playerChanged(newPlayer));
     }
