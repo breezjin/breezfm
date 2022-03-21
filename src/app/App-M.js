@@ -19,11 +19,11 @@ export default function App() {
         <div className='player'>
           <Player />
         </div>
-        <div className='pages'>
-          <Outlet />
-        </div>
       </div>
       <BgImgs />
+      <div className='pages'>
+        <Outlet />
+      </div>
     </StyledApp>
   );
 }
@@ -40,7 +40,6 @@ const StyledApp = styled.div`
 
     .player {
       width: 100%;
-      height: calc(100vh - 3rem);
       display: flex;
       justify-content: center;
     }
