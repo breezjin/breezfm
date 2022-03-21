@@ -1,19 +1,11 @@
+import Proptypes from 'prop-types';
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Menu() {
+export default function Menu({ handleMenuOpen }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  function goto(y) {
-    const x = window.scrollX;
-    window.scrollTo({
-      top: y,
-      left: x,
-      behavior: 'smooth',
-    });
-  }
 
   return (
     <StyledMenu>
@@ -22,12 +14,12 @@ export default function Menu() {
           className={pathname === '/about' ? 'menu-current' : 'menu'}
           role='button'
           onClick={() => {
-            navigate('/about');
-            goto('100vh');
+            navigate('/about', { state: 'fromMenu' });
+            handleMenuOpen();
           }}
           onKeyDown={() => {
-            navigate('/about');
-            goto('100vh');
+            navigate('/about', { state: 'fromMenu' });
+            handleMenuOpen();
           }}
           tabIndex={0}
         >
@@ -38,8 +30,14 @@ export default function Menu() {
         <div
           className={pathname === '/feel' ? 'menu-current' : 'menu'}
           role='button'
-          onClick={() => navigate('/feel')}
-          onKeyDown={() => navigate('/feel')}
+          onClick={() => {
+            navigate('/feel', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
+          onKeyDown={() => {
+            navigate('/feel', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
           tabIndex={0}
         >
           Feel
@@ -49,8 +47,14 @@ export default function Menu() {
         <div
           className={pathname === '/daily' ? 'menu-current' : 'menu'}
           role='button'
-          onClick={() => navigate('/daily')}
-          onKeyDown={() => navigate('/daily')}
+          onClick={() => {
+            navigate('/daily', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
+          onKeyDown={() => {
+            navigate('/daily', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
           tabIndex={0}
         >
           Daily
@@ -60,8 +64,14 @@ export default function Menu() {
         <div
           className={pathname === '/videos' ? 'menu-current' : 'menu'}
           role='button'
-          onClick={() => navigate('/videos')}
-          onKeyDown={() => navigate('/videos')}
+          onClick={() => {
+            navigate('/videos', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
+          onKeyDown={() => {
+            navigate('/videos', { state: 'fromMenu' });
+            handleMenuOpen();
+          }}
           tabIndex={0}
         >
           Videos
@@ -71,7 +81,12 @@ export default function Menu() {
   );
 }
 
+Menu.propTypes = {
+  handleMenuOpen: Proptypes.func.isRequired,
+};
+
 const StyledMenu = styled.div`
+  width: 100%;
   font-weight: 300;
   margin: 1rem 0rem 1rem 0rem;
   display: flex;

@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content';
 
 import ButtonAuth from '../../common/components/buttons/ButtonAuth';
 import ButtonKakao from '../../common/components/buttons/ButtonKakao';
-import ButtonProfile from '../../common/components/buttons/ButtonProfile';
+import ButtonProfileM from '../../common/components/buttons/ButtonProfile-M';
 import { userLoggedOut } from '../login/loginSlice';
 
 export default function Auth() {
@@ -66,7 +66,7 @@ export default function Auth() {
   return (
     <StyledAuth>
       {isLoggedIn && (
-        <ButtonProfile
+        <ButtonProfileM
           id={myId}
           avatar={myAvatar}
           name={myName}

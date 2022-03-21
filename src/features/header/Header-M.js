@@ -1,33 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VscMenu } from 'react-icons/vsc';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logoBreez from '../../assets/logo/BREEZ-text.svg';
-import MAuth from './MAuth';
-import MMenu from './MMenu';
-import MWeather from './MWeather';
+import MAuth from './Auth-M';
+import MMenu from './Menu-M';
+import MWeather from './Weather-M';
 
 export default function Header() {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleMenuOpen = () => {
+    setIsOpen((current) => !current);
+  };
+
+  useEffect(() => {
+    function goto(y) {
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth',
+      });
+    }
+    const subSection = window.outerHeight;
+
+    if (state === 'fromMenu') {
+      goto(subSection);
+    } else {
+      goto(0);
+    }
+  }, [state]);
 
   return (
     <StyledHeader>
       <div
         className='logo'
         role='button'
-        onClick={() => navigate('/')}
-        onKeyDown={() => navigate('/')}
+        onClick={() => {
+          navigate('/');
+          if (isOpen) handleMenuOpen();
+        }}
+        onKeyDown={() => {
+          navigate('/');
+          if (isOpen) handleMenuOpen();
+        }}
         tabIndex={0}
       >
         <img className='logo-text' src={logoBreez} alt='logo' />
       </div>
       <MWeather />
-      <VscMenu onClick={() => setIsOpen((current) => !current)} />
+      <VscMenu onClick={handleMenuOpen} />
       {isOpen && (
         <div className='sub-area'>
-          <MMenu />
+          <MMenu handleMenuOpen={handleMenuOpen} />
           <MAuth />
         </div>
       )}

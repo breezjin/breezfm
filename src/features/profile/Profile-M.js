@@ -7,7 +7,7 @@ import styled from 'styled-components';
 // import withReactContent from 'sweetalert2-react-content';
 
 // import { userUpdated } from '../login/loginSlice';
-import MMyFeeds from './MMyFeeds';
+import MMyFeeds from './MyFeeds-M';
 
 export default function Profile() {
   // const dispatch = useDispatch();

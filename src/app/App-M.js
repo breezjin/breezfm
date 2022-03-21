@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 import BgImgs from '../features/background/BgImgs';
-import MHeader from '../features/header/MHeader';
+import MHeader from '../features/header/Header-M';
 import Player from '../features/player/Player';
 
 export default function App() {

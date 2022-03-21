@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MFeeds from './feed/MFeeds';
+import MFeeds from './feed/Feeds-M';
 
 export default function Feel() {
   return (
