@@ -144,6 +144,9 @@ export default function Player() {
           <div className='album'>
             {breezSongInfo && `${breezSongInfo.album} (${breezSongInfo.year})`}
           </div>
+          {/* <audio autoPlay controls loadedmetadata>
+            <track kind='captions' src={currentPlayerUrls} />
+          </audio> */}
           <ReactPlayer
             className='react-player'
             url={currentPlayerUrls}
