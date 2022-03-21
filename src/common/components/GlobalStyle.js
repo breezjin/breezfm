@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     -ms-overflow-style: none;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   ::-webkit-scrollbar {
