@@ -129,7 +129,8 @@ export default function Player() {
           <img
             className='cover'
             src={
-              breezSongInfo && breezSongInfo.thumb
+              breezSongInfo &&
+              breezSongInfo.thumb.replace('http://', 'https://')
                 ? breezSongInfo.thumb
                 : defaultCover
             }
