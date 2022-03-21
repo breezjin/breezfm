@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import BgImgs from '../features/background/BgImgs';
 import MHeader from '../features/header/Header-M';
-import Player from '../features/player/Player';
+import PlayerM from '../features/player/Player-M';
 
 export default function App() {
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function App() {
       <MHeader />
       <div className='body-area'>
         <div className='player'>
-          <Player />
+          <PlayerM />
         </div>
         <div className='pages'>
           <Outlet />
