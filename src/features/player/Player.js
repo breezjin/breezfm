@@ -13,7 +13,7 @@ import getSongInfo from '../../common/api/getSongInfo';
 import getYoutube from '../../common/api/getYoutube';
 import ButtonAuth from '../../common/components/buttons/ButtonAuth';
 import ButtonPlay from '../../common/components/buttons/ButtonPlay';
-import { playerChanged } from './playerSlice';
+import { playerChanged, breezSongInfoChanged } from './playerSlice';
 
 export default function Player() {
   const dispatch = useDispatch();
@@ -59,6 +59,7 @@ export default function Player() {
     const checkSongInfo = setInterval(async () => {
       const songInfo = await getSongInfo();
       setBreezSongInfo(songInfo);
+      dispatch(breezSongInfoChanged(songInfo));
     }, 5000);
 
     async function setYoutubeUrl() {
@@ -87,7 +88,7 @@ export default function Player() {
     }
 
     async function setBreezUrl() {
-      const newUrl = 'https://stream.radiojar.com/61qtsv9abkhvv.mp3';
+      const newUrl = 'https://stream.radiojar.com/61qtsv9abkhvv';
       const newPlayer = { target: source, urls: newUrl };
       dispatch(playerChanged(newPlayer));
     }

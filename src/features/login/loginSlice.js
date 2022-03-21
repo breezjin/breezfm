@@ -16,14 +16,20 @@ export const loginSlice = createSlice({
     userLoggedIn: (state, action) => {
       state.isLoggedIn = true;
       state.userId = action.payload.userId;
-      state.userAvatar = action.payload.userAvatar;
+      state.userAvatar = action.payload.userAvatar.replace(
+        'http://',
+        'https://'
+      );
       state.userName = action.payload.userName;
       state.userEmail = action.payload.userEmail;
     },
     userUpdated: (state, action) => {
       state.isLoggedIn = true;
       state.userId = action.payload.userId;
-      state.userAvatar = action.payload.userAvatar;
+      state.userAvatar = action.payload.userAvatar.replace(
+        'http://',
+        'https://'
+      );
       state.userName = action.payload.userName;
       state.userEmail = action.payload.userEmail;
     },
