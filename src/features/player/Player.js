@@ -256,7 +256,7 @@ export default function Player() {
 const StyledPlayer = styled.div`
   z-index: 10;
   width: 90%;
-  min-width: 300px;
+  min-width: 200px;
   height: fit-content;
   background-color: #000000a2;
   border-radius: 0.3rem;
@@ -285,6 +285,7 @@ const StyledPlayer = styled.div`
 
     .cover {
       width: calc(100% - 2rem);
+      aspect-ratio: 1 / 1;
     }
 
     .title {
