@@ -25,9 +25,9 @@ export default function Player() {
 
   const [source, setSource] = useState(null);
   const [tags, setTags] = useState(null);
-  const [mute, setMute] = useState(true);
-  const [volume, setVolume] = useState(0);
-  const [isPlay, setIsPlay] = useState(true);
+  const [mute, setMute] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const [isPlay, setIsPlay] = useState(false);
 
   const [breezSongInfo, setBreezSongInfo] = useState(null);
 
