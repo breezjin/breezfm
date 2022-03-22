@@ -219,7 +219,7 @@ export default function Player() {
       </div>
       <div className='content-wrapper'>
         <div className='content-notice'>
-          {!currentPlayerTarget && (
+          {(currentPlayerTarget === null || 'default') && (
             <p>
               🤔 현재 이런 상황이에요.
               <li>위치정보공유를 동의하지 않았거나 😥</li>
