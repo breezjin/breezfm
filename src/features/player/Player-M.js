@@ -62,6 +62,12 @@ export default function Player() {
       dispatch(breezSongInfoChanged(songInfo));
     }, 5000);
 
+    function handleYoutubeError() {
+      const defaultUrl = 'https://youtu.be/9xABtV74XS0';
+      const newPlayer = { target: null, urls: defaultUrl };
+      dispatch(playerChanged(newPlayer));
+    }
+
     async function setYoutubeUrl() {
       clearInterval(checkSongInfo);
       const query = `${currentWeather.weather[0].main}`;
@@ -80,10 +86,10 @@ export default function Player() {
             queryString.replace('[playlist],music', '').split(',').join(' #')
           );
         } else {
-          setSource('breez');
+          handleYoutubeError();
         }
       } catch (error) {
-        setSource('breez');
+        handleYoutubeError();
       }
     }
 
