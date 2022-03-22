@@ -163,7 +163,8 @@ export default function Player() {
           />
         </div>
       )}
-      {(currentPlayerTarget === 'youtube' || 'default') && (
+      {(currentPlayerTarget === 'youtube' ||
+        currentPlayerTarget === 'default') && (
         <div className='player-wrapper'>
           <div className='player-wrapper-inner'>
             <ReactPlayer
@@ -219,7 +220,8 @@ export default function Player() {
       </div>
       <div className='content-wrapper'>
         <div className='content-notice'>
-          {(currentPlayerTarget === null || 'default') && (
+          {(currentPlayerTarget === null ||
+            currentPlayerTarget === 'default') && (
             <p>
               🤔 현재 이런 상황이에요.
               <li>위치정보공유를 동의하지 않았거나 😥</li>
