@@ -64,7 +64,7 @@ export default function Player() {
 
     function handleYoutubeError() {
       const defaultUrl = 'https://youtu.be/9xABtV74XS0';
-      const newPlayer = { target: null, urls: defaultUrl };
+      const newPlayer = { target: 'default', urls: defaultUrl };
       dispatch(playerChanged(newPlayer));
     }
 
@@ -163,7 +163,7 @@ export default function Player() {
           />
         </div>
       )}
-      {currentPlayerTarget === 'youtube' && (
+      {(currentPlayerTarget === 'youtube' || 'default') && (
         <div className='player-wrapper'>
           <div className='player-wrapper-inner'>
             <ReactPlayer
