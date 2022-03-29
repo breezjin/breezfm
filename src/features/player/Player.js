@@ -234,6 +234,16 @@ export default function Player() {
             </p>
           )}
           {currentPlayerTarget === 'youtube' && <p className='tag'> {tags}</p>}
+          {currentPlayerTarget === 'youtube' && (
+            <a
+              className='yt-link'
+              href='https://developers.google.com/youtube/terms/api-services-terms-of-service-apac'
+              target='_blank'
+              rel='noreferrer'
+            >
+              YouTube API Services Terms of Service
+            </a>
+          )}
         </div>
       </div>
       <div className='controller-source-selector'>
@@ -357,6 +367,7 @@ const StyledPlayer = styled.div`
 
   .content-wrapper {
     padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 1rem;
 
     .content-notice {
       font-size: small;
@@ -365,6 +376,12 @@ const StyledPlayer = styled.div`
 
     .tag {
       color: #a0a0a0;
+    }
+
+    .yt-link {
+      color: gray;
+      font-size: x-small;
+      font-style: italic;
     }
   }
 

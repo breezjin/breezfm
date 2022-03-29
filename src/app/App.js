@@ -52,7 +52,7 @@ const StyledApp = styled.div`
     .pages {
       width: 75%;
       min-width: 300px;
-      height: calc(100vh - 3rem);
+      height: calc(100vh - 5rem);
       display: flex;
       justify-content: center;
     }

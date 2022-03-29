@@ -21,6 +21,8 @@ import Login from './features/login/Login';
 import { checkToken } from './features/login/loginSlice';
 import Profile from './features/profile/Profile';
 import ProfileM from './features/profile/Profile-M';
+import TermsOfPrivacy from './features/terms/TermsOfPrivacy';
+import TermsOfService from './features/terms/TermsOfService';
 import Videos from './features/videos/Videos';
 import VideosM from './features/videos/Videos-M';
 import reportWebVitals from './reportWebVitals';
@@ -51,6 +53,8 @@ ReactDOM.render(
               />
               <Route path='error' element={<ErrorPage />} />
               <Route path='login/process' element={<Login />} />
+              <Route path='terms/service' element={<TermsOfService />} />
+              <Route path='terms/privacy' element={<TermsOfPrivacy />} />
               <Route
                 path='user/:userId'
                 element={isMobile ? <ProfileM /> : <Profile />}
