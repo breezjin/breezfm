@@ -74,6 +74,7 @@ const StyledUnsplashAttribute = styled.div`
   display: flex;
 
   .split {
+    color: gray;
     display: flex;
     align-items: center;
   }
