@@ -64,7 +64,7 @@ export default function Player() {
 
     async function setYoutubeUrl() {
       clearInterval(checkSongInfo);
-      const query = `장국영`;
+      const query = `${currentWeather.weather[0].main}`;
 
       try {
         const { data, queryString } = await getYoutube(query);
@@ -224,8 +224,8 @@ export default function Player() {
           )}
           {currentPlayerTarget === 'youtube' && (
             <p>
-              4월 1일, 오늘은 장국영이 거짓말처럼 세상을 떠난 날입니다. 오늘
-              Feel Now는 장국영 특집으로 보내 드립니다.
+              위치정보 동의를 해주시면 지금 당신이 있는 공간의 분위기를 살펴서
+              적절한 음악이 자동 재생됩니다.
             </p>
           )}
           {currentPlayerTarget === 'breez' && (
