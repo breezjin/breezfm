@@ -25,9 +25,9 @@ export default function Player() {
 
   const [source, setSource] = useState(null);
   const [tags, setTags] = useState(null);
-  const [mute, setMute] = useState(false);
-  const [volume, setVolume] = useState(0.5);
-  const [isPlay, setIsPlay] = useState(false);
+  const [mute, setMute] = useState(true);
+  const [volume, setVolume] = useState(0);
+  const [isPlay, setIsPlay] = useState(true);
 
   const [breezSongInfo, setBreezSongInfo] = useState(null);
 
@@ -62,15 +62,9 @@ export default function Player() {
       dispatch(breezSongInfoChanged(songInfo));
     }, 5000);
 
-    function handleYoutubeError() {
-      const defaultUrl = 'https://youtu.be/9xABtV74XS0';
-      const newPlayer = { target: 'default', urls: defaultUrl };
-      dispatch(playerChanged(newPlayer));
-    }
-
     async function setYoutubeUrl() {
       clearInterval(checkSongInfo);
-      const query = `장국영`;
+      const query = `${currentWeather.weather[0].main}`;
 
       try {
         const { data, queryString } = await getYoutube(query);
@@ -86,10 +80,10 @@ export default function Player() {
             queryString.replace('[playlist],music', '').split(',').join(' #')
           );
         } else {
-          handleYoutubeError();
+          setSource('breez');
         }
       } catch (error) {
-        handleYoutubeError();
+        setSource('breez');
       }
     }
 
@@ -163,8 +157,7 @@ export default function Player() {
           />
         </div>
       )}
-      {(currentPlayerTarget === 'youtube' ||
-        currentPlayerTarget === 'default') && (
+      {currentPlayerTarget === 'youtube' && (
         <div className='player-wrapper'>
           <div className='player-wrapper-inner'>
             <ReactPlayer
@@ -220,8 +213,7 @@ export default function Player() {
       </div>
       <div className='content-wrapper'>
         <div className='content-notice'>
-          {(currentPlayerTarget === null ||
-            currentPlayerTarget === 'default') && (
+          {!currentPlayerTarget && (
             <p>
               🤔 현재 이런 상황이에요.
               <li>위치정보공유를 동의하지 않았거나 😥</li>
@@ -232,8 +224,8 @@ export default function Player() {
           )}
           {currentPlayerTarget === 'youtube' && (
             <p>
-              4월 1일, 오늘은 장국영이 거짓말처럼 세상을 떠난 날입니다. 오늘
-              Feel Now는 장국영 특집으로 보내 드립니다.
+              위치정보 동의를 해주시면 지금 당신이 있는 공간의 분위기를 살펴서
+              적절한 음악이 자동 재생됩니다.
             </p>
           )}
           {currentPlayerTarget === 'breez' && (
@@ -242,6 +234,16 @@ export default function Player() {
             </p>
           )}
           {currentPlayerTarget === 'youtube' && <p className='tag'> {tags}</p>}
+          {currentPlayerTarget === 'youtube' && (
+            <a
+              className='yt-link'
+              href='https://developers.google.com/youtube/terms/api-services-terms-of-service-apac'
+              target='_blank'
+              rel='noreferrer'
+            >
+              YouTube API Services Terms of Service
+            </a>
+          )}
         </div>
       </div>
       <div className='controller-source-selector'>
@@ -365,6 +367,7 @@ const StyledPlayer = styled.div`
 
   .content-wrapper {
     padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 1rem;
 
     .content-notice {
       font-size: small;
@@ -373,6 +376,12 @@ const StyledPlayer = styled.div`
 
     .tag {
       color: #a0a0a0;
+    }
+
+    .yt-link {
+      color: gray;
+      font-size: x-small;
+      font-style: italic;
     }
   }
 

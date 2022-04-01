@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import bgDark from '../../assets/bg-dark.png';
 import getImgs from '../../common/api/getImgs';
-import UnsplashAttribute from './UnsplashAttribute';
+import UnsplashAttributeM from './UnsplashAttribute-M';
 
 export default function BgImgs({ playerHeight }) {
   const [currentImgs, setCurrentImgs] = useState(null);
@@ -60,7 +60,7 @@ export default function BgImgs({ playerHeight }) {
                   backgroundPosition: 'center',
                 }}
               >
-                <UnsplashAttribute
+                <UnsplashAttributeM
                   profile={currentImg.photographerProfile}
                   name={currentImg.photographerName}
                 />
