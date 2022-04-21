@@ -64,8 +64,25 @@ export default function Videos() {
               제공 및 참여기회 제공 , 접속빈도 파악 또는 회원의 서비스 이용에
               대한 통계 등을 목적으로 개인정보를 처리합니다.
             </p>
+
+            <p className='ls2'>
+              5. 위치정보 기반 맞춤형 서비스 제공에 활용
+              <br />
+              사용자의 위치정보와 더불어 Youtube API를 활용해 계정별 이용 서비스
+              등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가 대표적인
+              사례 입니다. 단, BEEZ에서는 사용자의 Youtube 계정 정보를 별도로
+              저장하지 않습니다. 관련 내용은 Youtube 개인정보 처리방침을 참고해
+              주시기 바랍니다.
+              <br />
+              <a
+                href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
+                target='_blank'
+                rel='noreferrer'
+              >
+                YouTube API Services - Developer Policies
+              </a>
+            </p>
           </ul>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>제2조(개인정보의 처리 및 보유 기간)</strong>
@@ -92,7 +109,6 @@ export default function Videos() {
               </p>
             </ol>
           </p>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>
@@ -129,7 +145,6 @@ export default function Videos() {
             본인이거나 정당한 대리인인지를 확인합니다.
           </p>
           <br />
-          <br />
           <p className='lh6 bs4'>
             <strong>제4조(처리하는 개인정보의 항목 작성) </strong>
             <br />
@@ -149,7 +164,6 @@ export default function Videos() {
               </p>
             </ol>
           </p>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>
@@ -185,7 +199,6 @@ export default function Videos() {
               </li>
             </ol>
           </p>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>제6조(개인정보의 안전성 확보 조치)</strong>
@@ -243,7 +256,6 @@ export default function Videos() {
             조치를 하고 있으며 침입차단시스템을 이용하여 외부로부터의 무단
             접근을 통제하고 있습니다.
             <br />
-            <br />
           </p>
           <br />
           <p className='lh6 bs4'>
@@ -287,7 +299,7 @@ export default function Videos() {
               <li>성명 : 윤진호</li>
               <li>직책 : CEO</li>
               <li>직급 : 대표</li>
-              <li>연락처 : 02-3009-3805, master@breez.fm</li>
+              <li>연락처 : master@breez.fm</li>
             </ul>
           </p>
           <p className='sub_p'>
@@ -297,7 +309,6 @@ export default function Videos() {
             있습니다. BREEZ Communications LLC 은(는) 정보주체의 문의에 대해
             지체 없이 답변 및 처리해드릴 것입니다.
           </p>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>제9조(가명정보의 처리)</strong>
@@ -315,7 +326,6 @@ export default function Videos() {
             구분 합니다.
           </p>
           <br />
-          <br />
           <p className='sub_p mgt30'>
             <strong>제10조(개인정보 열람청구)</strong>
             <br />
@@ -325,7 +335,6 @@ export default function Videos() {
             &lt; BREEZ Communications LLC &gt;은(는) 정보주체의 개인정보
             열람청구가 신속하게 처리되도록 노력하겠습니다.{' '}
           </p>
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>
@@ -359,8 +368,6 @@ export default function Videos() {
             <br />※ 행정심판에 대해 자세한 사항은
             중앙행정심판위원회(www.simpan.go.kr) 홈페이지를 참고하시기 바랍니다.
           </p>
-
-          <br />
           <br />
           <p className='lh6 bs4'>
             <strong>
