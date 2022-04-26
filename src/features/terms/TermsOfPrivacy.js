@@ -68,11 +68,19 @@ export default function Videos() {
             <p className='ls2'>
               5. 위치정보 기반 맞춤형 서비스 제공에 활용
               <br />
-              사용자의 위치정보와 더불어 Youtube API를 활용해 계정별 이용 서비스
-              등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가 대표적인
-              사례 입니다. 단, BEEZ에서는 사용자의 Youtube 계정 정보를 별도로
-              저장하지 않습니다. 관련 내용은 Youtube 개인정보 처리방침을 참고해
-              주시기 바랍니다.
+              사용자의 위치정보를 바탕으로 YouTube API를 활용해 계정별 이용
+              서비스 등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가
+              대표적인 사례 입니다. 단, BEEZ에서는 사용자의 YouTube 계정 정보를
+              별도로 저장하지 않습니다. 관련 내용은 YouTube 개인정보 처리방침 및
+              개발자 정책을 참고해 주시기 바랍니다.
+              <br />
+              <a
+                href='https://developers.google.com/youtube/terms/api-services-terms-of-service'
+                target='_blank'
+                rel='noreferrer'
+              >
+                YouTube API Services Terms of Service
+              </a>
               <br />
               <a
                 href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
