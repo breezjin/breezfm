@@ -84,6 +84,14 @@ export default function Videos() {
               </a>
               <br />
               <a
+                href='http://www.google.com/policies/privacy'
+                target='_blank'
+                rel='noreferrer'
+              >
+                YouTube 개인정보 보호 및 약관
+              </a>
+              <br />
+              <a
                 href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
                 target='_blank'
                 rel='noreferrer'
@@ -413,6 +421,12 @@ const StyledVideos = styled.div`
   .content {
     margin: 1rem 2rem 1rem 2rem;
     overflow-y: scroll;
+  }
+
+  .ls2 {
+    :visited {
+      color: white;
+    }
   }
 
   p {
