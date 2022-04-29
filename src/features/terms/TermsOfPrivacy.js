@@ -72,32 +72,38 @@ export default function Videos() {
               서비스 등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가
               대표적인 사례 입니다. 사용자의 YouTube 계정 정보는 브라우저에
               캐싱되어있는 정보를 사용할 뿐 BREEZ는 사용자의 YouTube 계정 정보를
-              별도로 저장하지 않습니다. 관련 내용은 YouTube 서비스 약관 및
-              개발자 정책을 참고해 주시기 바랍니다.
+              별도로 저장하지 않습니다. 관련 내용은 아래 YouTube 서비스 약관,
+              개인정보 보호 및 약관, 개발자 정책을 참고해 주시기 바랍니다.
               <br />
-              <a
-                href='https://www.youtube.com/t/terms'
-                target='_blank'
-                rel='noreferrer'
-              >
-                YouTube 서비스 약관
-              </a>
-              <br />
-              <a
-                href='http://www.google.com/policies/privacy'
-                target='_blank'
-                rel='noreferrer'
-              >
-                YouTube 개인정보 보호 및 약관
-              </a>
-              <br />
-              <a
-                href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
-                target='_blank'
-                rel='noreferrer'
-              >
-                YouTube API Services - Developer Policies
-              </a>
+              <ul>
+                <li>
+                  <a
+                    href='https://www.youtube.com/t/terms'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube 서비스 약관
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='http://www.google.com/policies/privacy'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube 개인정보 보호 및 약관
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube API Services - Developer Policies
+                  </a>
+                </li>
+              </ul>
             </p>
           </ul>
           <br />
@@ -424,9 +430,7 @@ const StyledVideos = styled.div`
   }
 
   .ls2 {
-    :visited {
-      color: white;
-    }
+    color: white;
   }
 
   p {
