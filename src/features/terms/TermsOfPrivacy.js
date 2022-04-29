@@ -33,77 +33,79 @@ export default function Videos() {
               받는 등 필요한 조치를 이행할 예정입니다.
             </strong>
           </p>
-          <p className='ls2'>
-            1. 홈페이지 회원가입 및 관리
-            <br />
-            회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증,
-            회원자격 유지·관리, 서비스 부정이용 방지, 만14세 미만 아동의
-            개인정보 처리 시 법정대리인의 동의여부 확인, 각종 고지·통지,
-            고충처리 목적으로 개인정보를 처리합니다.
-          </p>
+          <ol>
+            <p className='ls2'>
+              1. 홈페이지 회원가입 및 관리
+              <br />
+              회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증,
+              회원자격 유지·관리, 서비스 부정이용 방지, 만14세 미만 아동의
+              개인정보 처리 시 법정대리인의 동의여부 확인, 각종 고지·통지,
+              고충처리 목적으로 개인정보를 처리합니다.
+            </p>
 
-          <p className='ls2'>
-            2. 민원사무 처리
-            <br />
-            민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락·통지,
-            처리결과 통보 목적으로 개인정보를 처리합니다.
-          </p>
+            <p className='ls2'>
+              2. 민원사무 처리
+              <br />
+              민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락·통지,
+              처리결과 통보 목적으로 개인정보를 처리합니다.
+            </p>
 
-          <p className='ls2'>
-            3. 재화 또는 서비스 제공
-            <br />
-            계약서·청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 연령인증,
-            요금결제·정산을 목적으로 개인정보를 처리합니다.
-          </p>
+            <p className='ls2'>
+              3. 재화 또는 서비스 제공
+              <br />
+              계약서·청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 연령인증,
+              요금결제·정산을 목적으로 개인정보를 처리합니다.
+            </p>
 
-          <p className='ls2'>
-            4. 마케팅 및 광고에의 활용
-            <br />
-            신규 서비스(제품) 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보
-            제공 및 참여기회 제공 , 접속빈도 파악 또는 회원의 서비스 이용에 대한
-            통계 등을 목적으로 개인정보를 처리합니다.
-          </p>
+            <p className='ls2'>
+              4. 마케팅 및 광고에의 활용
+              <br />
+              신규 서비스(제품) 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보
+              제공 및 참여기회 제공 , 접속빈도 파악 또는 회원의 서비스 이용에
+              대한 통계 등을 목적으로 개인정보를 처리합니다.
+            </p>
 
-          <p className='ls2'>
-            5. 위치정보 기반 맞춤형 서비스 제공에 활용
-            <br />
-            사용자의 위치정보를 바탕으로 YouTube API를 활용해 계정별 이용 서비스
-            등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가 대표적인
-            사례 입니다. 사용자의 YouTube 계정 정보는 브라우저에 캐싱되어있는
-            정보를 사용할 뿐 BREEZ는 사용자의 YouTube 계정 정보를 별도로
-            저장하지 않습니다. 관련 내용은 아래 YouTube 서비스 약관, 개인정보
-            보호 및 약관, 개발자 정책을 참고해 주시기 바랍니다.
-            <br />
-            <ul>
-              <li>
-                <a
-                  href='https://www.youtube.com/t/terms'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  YouTube 서비스 약관
-                </a>
-              </li>
-              <li>
-                <a
-                  href='http://www.google.com/policies/privacy'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  YouTube 개인정보 보호 및 약관
-                </a>
-              </li>
-              <li>
-                <a
-                  href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  YouTube API Services - Developer Policies
-                </a>
-              </li>
-            </ul>
-          </p>
+            <p className='ls2'>
+              5. 위치정보 기반 맞춤형 서비스 제공에 활용
+              <br />
+              사용자의 위치정보를 바탕으로 YouTube API를 활용해 계정별 이용
+              서비스 등급에 따라 영상재생 방식을 결정 합니다. 광고노출 여부가
+              대표적인 사례 입니다. 사용자의 YouTube 계정 정보는 브라우저에
+              캐싱되어있는 정보를 사용할 뿐 BREEZ는 사용자의 YouTube 계정 정보를
+              별도로 저장하지 않습니다. 관련 내용은 아래 YouTube 서비스 약관,
+              개인정보 보호 및 약관, 개발자 정책을 참고해 주시기 바랍니다.
+              <br />
+              <ul>
+                <li>
+                  <a
+                    href='https://www.youtube.com/t/terms'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube 서비스 약관
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='http://www.google.com/policies/privacy'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube 개인정보 보호 및 약관
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href='https://developers.google.com/youtube/terms/developer-policies#a-api-client-terms-of-use-and-privacy-policies'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    YouTube API Services - Developer Policies
+                  </a>
+                </li>
+              </ul>
+            </p>
+          </ol>
           <br />
           <p className='lh6 bs4'>
             <strong>제2조(개인정보의 처리 및 보유 기간)</strong>
