@@ -10,7 +10,7 @@ export default async function getYoutube(query) {
 
   try {
     const videos = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&videoEmbeddable=true&q=${queryString}`
+      `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_KEY}&part=snippet&q=${queryString}`
     );
 
     const result = {
