@@ -5,7 +5,7 @@ import { GoRadioTower } from 'react-icons/go';
 import { Bars } from 'react-loader-spinner';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import defaultCover from '../../assets/breez-default-cover.png';
@@ -17,7 +17,7 @@ import { playerChanged, breezSongInfoChanged } from './playerSlice';
 
 export default function Player() {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   const currentWeather = useSelector((state) => state.weather.currentWeather);
   const currentPlayerTarget = useSelector((state) => state.player.target);
@@ -247,7 +247,15 @@ export default function Player() {
         </div>
       </div>
       <div className='controller-source-selector'>
-        {(pathname === '/' || pathname === '/feel') && (
+        <ButtonAuth onClick={() => handleSource('youtube')}>
+          <BsYoutube className='icon' />
+          Feel Now
+        </ButtonAuth>
+        <ButtonAuth onClick={() => handleSource('breez')}>
+          <GoRadioTower className='icon' />
+          Feel BREEZ
+        </ButtonAuth>
+        {/* {(pathname === '/' || pathname === '/feel') && (
           <>
             <ButtonAuth onClick={() => handleSource('youtube')}>
               <BsYoutube className='icon' />
@@ -258,7 +266,7 @@ export default function Player() {
               Feel BREEZ
             </ButtonAuth>
           </>
-        )}
+        )} */}
       </div>
     </StyledPlayer>
   );
