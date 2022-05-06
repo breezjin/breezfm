@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { BsYoutube } from 'react-icons/bs';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
 import { GoRadioTower } from 'react-icons/go';
 import { Bars } from 'react-loader-spinner';
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import defaultCover from '../../assets/breez-default-cover.png';
+import ytIcon from '../../assets/yt_icon_mono_light.png';
 import getSongInfo from '../../common/api/getSongInfo';
 import getYoutube from '../../common/api/getYoutube';
 import ButtonAuth from '../../common/components/buttons/ButtonAuth';
@@ -248,7 +248,7 @@ export default function Player() {
       </div>
       <div className='controller-source-selector'>
         <ButtonAuth onClick={() => handleSource('youtube')}>
-          <BsYoutube className='icon' />
+          <img src={ytIcon} className='icon' alt='YouYube-icon' />
           Feel Now
         </ButtonAuth>
         <ButtonAuth onClick={() => handleSource('breez')}>
@@ -407,7 +407,7 @@ const StyledPlayer = styled.div`
   }
 
   .icon {
-    margin-right: 0.4rem;
+    margin-right: 0.6rem;
   }
 
   li {
