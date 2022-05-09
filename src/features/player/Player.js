@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { GiSpeaker, GiSpeakerOff } from 'react-icons/gi';
-import { GoRadioTower } from 'react-icons/go';
 import { Bars } from 'react-loader-spinner';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import antennaIcon from '../../assets/antenna.png';
 import defaultCover from '../../assets/breez-default-cover.png';
 import ytIcon from '../../assets/yt_icon_mono_light.png';
 import getSongInfo from '../../common/api/getSongInfo';
@@ -252,7 +252,7 @@ export default function Player() {
           Feel Now
         </ButtonAuth>
         <ButtonAuth onClick={() => handleSource('breez')}>
-          <GoRadioTower className='icon' />
+          <img src={antennaIcon} className='icon' alt='antenna-icon' />
           Feel BREEZ
         </ButtonAuth>
         {/* {(pathname === '/' || pathname === '/feel') && (

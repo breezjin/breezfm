@@ -83,8 +83,8 @@ export default function Videos() {
               플레이 리스트 또한 갱신 됩니다. 사용자가 브라우저를 닫을 경우 모든
               정보는 삭제되며, 별도로 local에 저장되는 정보는 없습니다. 더불어
               브라우저에 캐싱되어있는 Cookie 정보를 활용해서 YouTube 재생 방식을
-              결정 합니다. 광고노출 여부가 대표적인 사례 입니다. BREEZ는 그 외
-              사용자의 YouTube 계정 정보를 별도로 저장하지 않습니다. 관련 내용은
+              결정 합니다. 광고노출 여부가 대표적인 사례 입니다. BREEZ는
+              사용자의 개인정보를 물리적 저장소에 저장하지 않습니다. 관련 내용은
               아래 YouTube 서비스 약관, 개인정보 보호 및 약관, 개발자 정책을
               참고해 주시기 바랍니다.
               <br />
@@ -104,7 +104,7 @@ export default function Videos() {
                     target='_blank'
                     rel='noreferrer'
                   >
-                    YouTube 개인정보 보호 및 약관
+                    Google 개인정보 보호 및 약관
                   </a>
                 </li>
                 <li>
