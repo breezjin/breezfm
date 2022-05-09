@@ -26,6 +26,10 @@ export default function About() {
         </div>
         <hr />
         <div className='content'>
+          <div className='business'>
+            BREEZ는 Music Business 뿐 아니라 Web 개발 등 다양한 IT 사업을
+            전개하고 있습니다. 이메일로 언제든 문의 해주세요.
+          </div>
           <p>
             * Contact Us :{' '}
             <a href='mailto:master@breez.fm' target='_blank' rel='noreferrer'>
@@ -160,6 +164,10 @@ const StyledAbout = styled.div`
 
   .layout {
     margin: 2rem 4rem -1rem 4rem;
+  }
+
+  .business {
+    font-size: small;
   }
 
   .list {
