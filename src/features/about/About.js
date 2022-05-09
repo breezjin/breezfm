@@ -98,6 +98,13 @@ export default function About() {
             <div className='year'>
               2010년 - MGCP (Merry Gloomy Christmas Party) 1회
             </div>
+            <a
+              href='https://youtu.be/qI2iQPWLbOs'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <div className='yt-link' />
+            </a>
             <div className='didDo'>
               남무성의 해설이 있는 Jazz Concert / 재즈 평론가 남무성, 류복성,
               Gentle Rain, 김민주
