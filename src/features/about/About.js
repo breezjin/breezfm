@@ -145,9 +145,10 @@ const StyledAbout = styled.div`
   height: calc(100% - 2rem);
   background-color: #000000a2;
   border-radius: 0.3rem;
-  margin: 1rem 0rem 0rem 0rem;
+  margin: 1rem 0rem 2rem 0rem;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 
   h2 {
     color: green;
